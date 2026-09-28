@@ -18,6 +18,24 @@ def runtime_constraints():
     return list(dict.fromkeys(requirements))
 
 
+def _refresh_matplotlib_backends():
+    """Discover new backend entry points without resetting the running backend."""
+    if "matplotlib" not in sys.modules:
+        return
+    from matplotlib import backends
+
+    registry = getattr(backends, "backend_registry", None)
+    if registry is None:  # Matplotlib before 3.9 has no cached backend registry.
+        return
+    known = set(registry.list_all())
+    entries = [(entry.name, entry.value)
+               for entry in metadata.entry_points(group="matplotlib.backend")
+               if entry.name.lower() not in known]
+    if entries:
+        # Matplotlib 3.9+ caches its first scan and has no public refresh API.
+        registry._validate_and_store_entry_points(entries)
+
+
 def verify_checkout(root, release):
     """Fail safely if a previous tutorial left a different or edited checkout."""
     try:
@@ -54,6 +72,7 @@ def setup_colab(root, release):
             subprocess.run([sys.executable, "-m", "pip", "install", "--constraint", str(constraints),
                             "-e", f"{root}[colab]"], check=True)
         os.environ["DALISCOPE_COLAB_READY"] = marker
+    _refresh_matplotlib_backends()
     # Editable-install .pth files are only loaded when Python starts; this kernel is already running.
     if str(root) not in sys.path:
         sys.path.insert(0, str(root))

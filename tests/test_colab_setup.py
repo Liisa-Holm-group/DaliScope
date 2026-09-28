@@ -194,3 +194,42 @@ def test_refuses_imported_modules_from_another_checkout(colab_runtime, monkeypat
     assert runtime.manager_calls == []
     assert Path.cwd() == initial_cwd
     assert str(runtime.repo.resolve()) not in runtime.setup.sys.path
+
+
+def test_setup_discovers_widget_backend_installed_after_matplotlib_scan(colab_runtime, monkeypatch):
+    from importlib.metadata import EntryPoint
+    import matplotlib.backends as backends
+    import matplotlib.rcsetup as rcsetup
+    BackendRegistry = pytest.importorskip("matplotlib.backends.registry").BackendRegistry
+
+    runtime = colab_runtime
+    registry = BackendRegistry()
+    # Colab scans the inline backend before the setup cell installs ipympl.
+    with monkeypatch.context() as before_install:
+        before_install.setattr(registry, "_read_entry_points",
+                               lambda: [("inline", "matplotlib_inline.backend_inline")])
+        registry.list_all()
+    registry.is_valid_backend("module://existing_custom_backend")
+    original_backends = set(registry.list_all())
+    monkeypatch.setattr(backends, "backend_registry", registry)
+    monkeypatch.setattr(rcsetup, "backend_registry", registry)
+    installed_entry_points = [
+        EntryPoint(name="inline", value="matplotlib_inline.backend_inline", group="matplotlib.backend"),
+        EntryPoint(name="ipympl", value="ipympl.backend_nbagg", group="matplotlib.backend"),
+        EntryPoint(name="widget", value="ipympl.backend_nbagg", group="matplotlib.backend"),
+    ]
+    monkeypatch.setattr(runtime.setup.metadata, "entry_points",
+                        lambda *, group: installed_entry_points if group == "matplotlib.backend" else [])
+    backend = "module://ipympl.backend_nbagg"
+    with pytest.raises(ValueError, match="not a valid value for backend"):
+        rcsetup.validate_backend(backend)
+
+    runtime.setup.setup_colab(runtime.repo, "v0.1.2")
+    assert rcsetup.validate_backend(backend) == backend
+    assert original_backends <= set(registry.list_all())
+    assert {"ipympl", "widget"} <= set(registry.list_all())
+
+    # Refreshing twice must not add duplicate inline or widget entry points.
+    runtime.setup.setup_colab(runtime.repo, "v0.1.2")
+    assert rcsetup.validate_backend(backend) == backend
+    assert len(runtime.installations) == 1

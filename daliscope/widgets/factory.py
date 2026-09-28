@@ -121,8 +121,6 @@ def launch_interactive_view(func, title, params, fixed=None, control_wrappers=No
     Orchestrates the widget lifecycle. Automatically injects the global 'view_name'
     dropdown and standardizes the 'project' context inside the fixed parameters.
     """
-    plt.ioff()
-
     # Initialize dictionaries safely
     params = params.copy() if params else {}
     control_wrappers = control_wrappers or {}
@@ -166,9 +164,6 @@ def launch_interactive_view(func, title, params, fixed=None, control_wrappers=No
         display_result=False,
         return_state=True
     )
-
-    plt.close('all')
-    plt.ion()
 
     components = [wv]
     if project is not None:
@@ -491,10 +486,16 @@ def widget_view(func, params, title=None, auto_update=True, fixed=None,
             kwargs.update(fixed)
         with output:
             clear_output(wait=True)
-            plt.close('all')
-            fig = func(**kwargs)
-            if fig is not None:
-                display(fig)
+            previous_figures = set(plt.get_fignums())
+            with plt.ioff():
+                try:
+                    fig = func(**kwargs)
+                    if fig is not None:
+                        display(fig)
+                finally:
+                    # Leave canvases owned by other widgets available for interaction.
+                    for number in set(plt.get_fignums()) - previous_figures:
+                        plt.close(number)
 
     # ---------- wire callbacks ----------
     if auto_update:

@@ -21,8 +21,8 @@ Use the Release attachment basenames in `checksums.json`, with `bytes` and `sha2
 For example, with a validated tag and authenticated GitHub CLI:
 
 ```bash
-gh release create v0.1.2 --repo Liisa-Holm-group/DaliScope --verify-tag --title "DaliScope 0.1.2" --notes-file docs/release-notes.md
-gh release upload v0.1.2 /path/to/assets/GOLD.tar.gz /path/to/assets/daliscope-0.1.2-py3-none-any.whl /path/to/assets/daliscope-0.1.2.tar.gz /path/to/assets/DaliScope-0.1.2-source.zip /path/to/assets/checksums.json --repo Liisa-Holm-group/DaliScope
+gh release create v0.1.3 --repo Liisa-Holm-group/DaliScope --verify-tag --title "DaliScope 0.1.3" --notes-file docs/release-notes.md
+gh release upload v0.1.3 /path/to/assets/GOLD.tar.gz /path/to/assets/daliscope-0.1.3-py3-none-any.whl /path/to/assets/daliscope-0.1.3.tar.gz /path/to/assets/DaliScope-0.1.3-source.zip /path/to/assets/checksums.json --repo Liisa-Holm-group/DaliScope
 ```
 
 Once the release exists, `python scripts/download_example.py GOLD` downloads and verifies the optional pack. For earlier versions, pass the corresponding tag explicitly, such as `--tag v0.1.0`.
