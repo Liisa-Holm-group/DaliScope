@@ -8,3 +8,5 @@
 *.png binary
 # Preserve upstream Pfam description fields, including trailing spaces.
 daliscope/packer/data/pfam_names.tsv text eol=lf whitespace=-blank-at-eol
+# Preserve archived notebook exports byte-for-byte, including their original whitespace.
+docs/example-outputs/*.html -text whitespace=-blank-at-eol

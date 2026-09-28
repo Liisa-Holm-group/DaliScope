@@ -1,0 +1,44 @@
+[
+  {
+    "example": "WorkedExample1",
+    "description": "Multidomain analysis and sequence signatures",
+    "file": "WorkedExample1.html",
+    "original_file": "SignatureTest.html",
+    "source_url": "http://ekhidna2.biocenter.helsinki.fi/barcosel/tmp/SignatureTest.html",
+    "resolved_url": "http://ekhidna2.biocenter.helsinki.fi/barcosel/tmp/SignatureTest.html",
+    "status": 200,
+    "content_type": "text/html; charset=UTF-8",
+    "bytes": 3697461,
+    "sha256": "32938ce14f0edc7ff0c306366d13b8b7ef37b9f5bb50d2a037311814cd5dfdd3",
+    "retrieved_utc": "2026-09-28T19:45:38.793786+00:00",
+    "saved_bytes": 3698805,
+    "saved_sha256": "330354d9bac8010184525cdf59565e32357f4a9f44391dd6a93103cd3ef710e0",
+    "execution_version": null,
+    "changes": [
+      "Browser title identifies the current example name and HTML example output.",
+      "Navigation and explanatory header inserted immediately after the opening body tag."
+    ],
+    "scientific_content_preserved": true
+  },
+  {
+    "example": "WorkedExample2",
+    "description": "GOLD fold communities and structural clustering",
+    "file": "WorkedExample2.html",
+    "original_file": "WorkedExample-6.html",
+    "source_url": "http://ekhidna2.biocenter.helsinki.fi/barcosel/tmp/WorkedExample-6.html",
+    "resolved_url": "http://ekhidna2.biocenter.helsinki.fi/barcosel/tmp/WorkedExample-6.html",
+    "status": 200,
+    "content_type": "text/html; charset=UTF-8",
+    "bytes": 3015290,
+    "sha256": "333b222d85c22f4bad6db9f7a21f6911476919674f9cc9bf16f98341ab15ce81",
+    "retrieved_utc": "2026-09-28T19:45:39.547708+00:00",
+    "saved_bytes": 3016634,
+    "saved_sha256": "92303ce336ba114ad7d0f3a8c05718906a8fa29ecca285417c8cb06acaa77243",
+    "execution_version": null,
+    "changes": [
+      "Browser title identifies the current example name and HTML example output.",
+      "Navigation and explanatory header inserted immediately after the opening body tag."
+    ],
+    "scientific_content_preserved": true
+  }
+]
