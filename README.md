@@ -8,25 +8,27 @@ DaliScope analyzes an existing DALI data pack. Running a DALI search and provisi
 
 ## Run in your browser with Colab
 
-Start with **[01_quickstart.ipynb in Colab](https://colab.research.google.com/github/Liisa-Holm-group/DaliScope/blob/v0.1.2/notebooks/01_quickstart.ipynb)**. Connect to a CPU runtime, then choose **Runtime → Run all**. The first setup cell downloads the matching DaliScope source and example packs, installs the Colab dependencies, and enables custom widgets. You do not need to install Python locally or choose a local Jupyter kernel.
+Start with **[01_quickstart.ipynb in Colab](https://colab.research.google.com/github/Liisa-Holm-group/DaliScope/blob/v0.1.3/notebooks/01_quickstart.ipynb)**. Connect to a CPU runtime, then choose **Runtime → Run all**. The first setup cell downloads the matching DaliScope source and example packs, installs the Colab dependencies, and enables custom widgets. You do not need to install Python locally or choose a local Jupyter kernel.
 
 | Notebook | Purpose | Colab |
 | --- | --- | --- |
-| `01_quickstart.ipynb` | Short introduction; included 3ubpC pack | [Open in Colab](https://colab.research.google.com/github/Liisa-Holm-group/DaliScope/blob/v0.1.2/notebooks/01_quickstart.ipynb) |
-| `RunDaliScope-1.ipynb` | Comprehensive domain and motif workflow; included 3ubpC pack | [Open in Colab](https://colab.research.google.com/github/Liisa-Holm-group/DaliScope/blob/v0.1.2/notebooks/RunDaliScope-1.ipynb) |
-| `SignatureTest.ipynb` | Multidomain and sequence-signature case study; included ZN pack | [Open in Colab](https://colab.research.google.com/github/Liisa-Holm-group/DaliScope/blob/v0.1.2/notebooks/SignatureTest.ipynb) |
-| `WorkedExample-6.ipynb` | GOLD fold communities; automatically downloads the optional GOLD pack in Colab | [Open in Colab](https://colab.research.google.com/github/Liisa-Holm-group/DaliScope/blob/v0.1.2/notebooks/WorkedExample-6.ipynb) |
+| `01_quickstart.ipynb` | Short introduction; included 3ubpC pack | [Open in Colab](https://colab.research.google.com/github/Liisa-Holm-group/DaliScope/blob/v0.1.3/notebooks/01_quickstart.ipynb) |
+| `RunDaliScope-1.ipynb` | Comprehensive domain and motif workflow; included 3ubpC pack | [Open in Colab](https://colab.research.google.com/github/Liisa-Holm-group/DaliScope/blob/v0.1.3/notebooks/RunDaliScope-1.ipynb) |
+| `SignatureTest.ipynb` | Multidomain and sequence-signature case study; included ZN pack | [Open in Colab](https://colab.research.google.com/github/Liisa-Holm-group/DaliScope/blob/v0.1.3/notebooks/SignatureTest.ipynb) |
+| `WorkedExample-6.ipynb` | GOLD fold communities; automatically downloads the optional GOLD pack in Colab | [Open in Colab](https://colab.research.google.com/github/Liisa-Holm-group/DaliScope/blob/v0.1.3/notebooks/WorkedExample-6.ipynb) |
 
-These links use **v0.1.2** so notebook code and installed source match. After the default example finishes, explore its display controls. To change analysis inputs or domain/filter/motif choices, reload the project and execute subsequent sections in order, applying the new choices before registering views; existing view names are retained on rerun. The comprehensive notebook leaves its expensive community step off by default; GOLD runs community analysis. Case-study choices and biological interpretations apply to their frozen input datasets.
+These links use **v0.1.3** so notebook code and installed source match. After the default example finishes, explore its display controls. To change analysis inputs or domain/filter/motif choices, reload the project and execute subsequent sections in order, applying the new choices before registering views; existing view names are retained on rerun. The comprehensive notebook leaves its expensive community step off by default; GOLD runs community analysis. Case-study choices and biological interpretations apply to their frozen input datasets.
 
-See the [Colab guide](docs/colab.md) for runtime setup, browser interaction, and downloading outputs. Actual Colab frontend interaction has not yet been verified; the [validation record](docs/validation.md) distinguishes executed checks from this limit.
+Version 0.1.3 refreshes Matplotlib backend discovery after live installation and preserves existing widget figures while later display/profile plots are drawn. Its notebooks use standard Python 3 kernel metadata for Colab. The scientific algorithms and example data are unchanged from 0.1.2.
+
+See the [Colab guide](docs/colab.md) for runtime setup, browser interaction, and downloading outputs. The 0.1.3 comprehensive workflow completed in a fresh hosted Colab runtime, including automatic backend setup and hit-plane redraw after later analysis. The [validation record](docs/validation.md) records the tested source, environments, and remaining frontend checks.
 
 ## Run locally with Python 3.12
 
 Use **Python 3.12** for the reference environment. Check `python --version` before creating the environment; the commands below assume it reports 3.12. If your default Python is 3.13, install/select Python 3.12 and use its executable for the venv command, or use the independent Conda alternative below. The package declares Python 3.10 or newer; tested platform/version coverage is recorded in [validation](docs/validation.md).
 
 ```bash
-git clone --branch v0.1.2 https://github.com/Liisa-Holm-group/DaliScope.git
+git clone --branch v0.1.3 https://github.com/Liisa-Holm-group/DaliScope.git
 cd DaliScope
 python -m venv .venv
 ```
