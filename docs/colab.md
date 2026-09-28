@@ -4,9 +4,11 @@
 
 Open one of the versioned links in the [README](../README.md#run-in-your-browser-with-colab), connect to a runtime, and select **Runtime → Run all**. A standard **CPU** runtime is sufficient for the tutorial code; GPU acceleration is not used by these workflows.
 
-The first code cell handles Colab setup. It obtains **DaliScope v0.1.2** in `/content/DaliScope`, installs the package with `.[colab]` in the runtime's Python environment, and enables Google's custom widget manager. Installing Colab dependencies is done once per runtime. A GitHub notebook link supplies only the notebook, so the source clone and data files are still necessary; the setup cell provides them automatically.
+The first code cell handles Colab setup. It obtains **DaliScope v0.1.3** in `/content/DaliScope`, installs the package with `.[colab]` in the runtime's Python environment, and enables Google's custom widget manager. After live installation it refreshes Matplotlib's cached backend discovery so the running kernel can request the newly installed widget backend. Installing Colab dependencies is done once per runtime. A GitHub notebook link supplies only the notebook, so the source clone and data files are still necessary; the setup cell provides them automatically.
 
 Use the Colab runtime's kernel. Local venv creation, Conda commands, ipykernel registration, and the local **Python (DaliScope)** kernel selection are not part of this procedure. In a local Jupyter session, the first Colab setup cell is a no-op and the README's local installation applies.
+
+The v0.1.3 notebooks use generic **Python 3** kernel metadata to avoid Colab's unrecognized local-runtime notice. This does not select your local environment: when using local Jupyter, still choose the registered **Python (DaliScope)** kernel described in the README.
 
 Start with `01_quickstart.ipynb`. It should report query `3ubpC`, length **570**, and **1,048** rows in the default view, then show plots, a structure viewer, and a session save/restore confirmation. Longer examples run their default analysis choices first. After completion, explore the display controls. For revised data, domains, filters, or motifs, start again from the cell that loads a fresh `Project`, then execute the following sections in order and apply your new control choices before registering views. Reusing an existing view name does not replace its earlier analysis; use a fresh project or a new unique view name.
 
@@ -17,20 +19,21 @@ The cloned repository includes the 3ubpC, dotp, and ZN example packs. Quickstart
 `WorkedExample-6.ipynb` uses the optional **GOLD** pack, approximately 50 MiB. In Colab it downloads the release asset when absent and verifies its SHA-256 against `notebooks/data/datasets.json` before analysis. To download or verify it manually in a Colab code cell:
 
 ```python
-!python /content/DaliScope/scripts/download_example.py GOLD --tag v0.1.2
+!python /content/DaliScope/scripts/download_example.py GOLD --tag v0.1.3
 ```
 
 For your own pack, upload it through Colab's Files panel and set `pack_path` to its absolute runtime path, such as `/content/my-query.tar.gz`. It must follow the [data-pack contract](data-format.md); a lone PDB is not a DaliScope input pack.
 
-The comprehensive `RunDaliScope-1.ipynb` leaves its expensive community pipeline off by default. A **Pipeline is OFF** message for that step is expected. The signature step is controlled by its IC condition. GOLD executes community detection, recursive examples, and cohesion evaluation; let these computation cells finish before running dependent cells. Runtime depends on the population and cloud hardware.
+The comprehensive `RunDaliScope-1.ipynb` leaves its expensive community pipeline off by default. A **Pipeline is OFF** message for that step is expected. The signature step is controlled by its IC condition. GOLD executes community detection, recursive examples, and STRUCTAL cohesion evaluation; the cohesion stage can take several minutes on the frozen example. Let these computation cells finish before running dependent cells. Runtime depends on the population and cloud hardware.
 
 ## Use the browser controls
 
-The setup enables Colab's custom widget manager for the domain viewer, ipywidgets, Plotly controls, and Matplotlib widget backend. Some viewers also load JavaScript from external servers. An emitted widget without working mouse controls is not a completed frontend check.
+The setup enables Colab's custom widget manager for the domain viewer, ipywidgets, Plotly controls, and Matplotlib widget backend. Version 0.1.3 keeps existing widget figures available when later display/profile plots are drawn and cleaned up. After later sections finish, return to the comprehensive tutorial's hit-plane plot, switch its selected view, and check that the plotted points update along with the controls. Some viewers also load JavaScript from external servers. An emitted widget without working mouse controls is not a completed frontend check.
 
 - Rotate and zoom the py3Dmol structure; use available target controls to change the selected structure.
 - In the domain viewer, edit the PDB domain text and click **Apply**. Verify that the coloring and domain-centering buttons respond. **Reset** restores the initial ranges. If testing an edit before running a case study, reset it before registering the domains.
 - Hover over Plotly points, zoom, and switch the selected view. Changes should update the displayed data.
+- In panels with **↺ Refresh**, choose the view or grouping, then click that button to regenerate the plot and refresh available views. For example, the Pfam/Clan violin panel changes its chart titles and distributions after selecting `pfam` and clicking Refresh.
 - Apply selection/profile choices before the cells that lock their values and register a view. If that view was already registered, reload a fresh project and work through the sections again, or choose a new unique view name. Display changes do not automatically rebuild subsequent analysis.
 
 Domain text uses **one-based inclusive PDB residues**; the notebooks explicitly convert it to zero-based half-open clipping ranges. GOLD's stated core is PDB residues **23–123**. See [usage](usage.md) for the API conventions.
@@ -66,6 +69,8 @@ Download outputs before deleting or losing the runtime. Saving the notebook to D
 
 ## Source version and validation limits
 
-The v0.1.2 Colab links, setup source checkout, and GOLD release selection use the same version. Keep that version fixed when recording an analysis. Record the data checksum, domains, filters, and clustering/motif parameters alongside outputs; upgrading source or correcting domain ranges can change results.
+The v0.1.3 Colab links, setup source checkout, and GOLD release selection use the same version. Its display/setup changes leave the scientific algorithms and frozen example data unchanged from 0.1.2. Keep that version fixed when recording an analysis. Record the data checksum, domains, filters, and clustering/motif parameters alongside outputs; upgrading source or correcting domain ranges can change results.
 
-Actual Colab frontend interaction has not yet been verified. Local notebook execution and GitHub Actions checks establish computations and widget emission for the recorded environments, rather than proving that every Colab runtime or browser widget works. Consult [validation](validation.md) for the checks that were executed. The procedures here describe how to perform that additional cloud/browser check.
+The 0.1.3 comprehensive workflow completed all 29 non-empty tutorial code cells in a fresh hosted Colab runtime on 28 September 2026. Setup installed the dependencies and refreshed backend discovery automatically. After the final analysis, switching the existing hit-plane widget to `dom_1` visibly updated the axes and plotted points. This pre-release check used the public source commit, with only the initial clone adapted to its branch because the release tag was not yet available; see [validation](validation.md) for exact provenance.
+
+The earlier published v0.1.2 quickstart completed its eight original code cells on hosted Colab, including PNG/TSV/session creation, restoration, and visible py3Dmol rendering. Domain Apply/Reset and centering were checked there. Direct mouse rotation/zoom in py3Dmol, Plotly mouse controls, and browser file downloads remain unverified. Hosted SignatureTest and the complete hosted GOLD analysis have not been recorded. The immutable v0.1.2 documentation and release assets retain their earlier snapshot.
