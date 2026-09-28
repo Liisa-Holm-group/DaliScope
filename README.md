@@ -17,7 +17,7 @@ Start with **[01_quickstart.ipynb in Colab](https://colab.research.google.com/gi
 | `SignatureTest.ipynb` | Multidomain and sequence-signature case study; included ZN pack | [Open in Colab](https://colab.research.google.com/github/Liisa-Holm-group/DaliScope/blob/v0.1.2/notebooks/SignatureTest.ipynb) |
 | `WorkedExample-6.ipynb` | GOLD fold communities; automatically downloads the optional GOLD pack in Colab | [Open in Colab](https://colab.research.google.com/github/Liisa-Holm-group/DaliScope/blob/v0.1.2/notebooks/WorkedExample-6.ipynb) |
 
-These links use **v0.1.2** so notebook code and installed source match. After the default example finishes, explore the controls and rerun the affected cells when changing inputs. The comprehensive notebook leaves its expensive community step off by default; GOLD runs community analysis. Case-study choices and biological interpretations apply to their frozen input datasets.
+These links use **v0.1.2** so notebook code and installed source match. After the default example finishes, explore its display controls. To change analysis inputs or domain/filter/motif choices, reload the project and execute subsequent sections in order, applying the new choices before registering views; existing view names are retained on rerun. The comprehensive notebook leaves its expensive community step off by default; GOLD runs community analysis. Case-study choices and biological interpretations apply to their frozen input datasets.
 
 See the [Colab guide](docs/colab.md) for runtime setup, browser interaction, and downloading outputs. Actual Colab frontend interaction has not yet been verified; the [validation record](docs/validation.md) distinguishes executed checks from this limit.
 

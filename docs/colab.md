@@ -8,7 +8,7 @@ The first code cell handles Colab setup. It obtains **DaliScope v0.1.2** in `/co
 
 Use the Colab runtime's kernel. Local venv creation, Conda commands, ipykernel registration, and the local **Python (DaliScope)** kernel selection are not part of this procedure. In a local Jupyter session, the first Colab setup cell is a no-op and the README's local installation applies.
 
-Start with `01_quickstart.ipynb`. It should report query `3ubpC`, length **570**, and **1,048** rows in the default view, then show plots, a structure viewer, and a session save/restore confirmation. Longer examples run their default analysis choices first. After completion, adjust controls or parameters and rerun the affected downstream cells to apply the changes.
+Start with `01_quickstart.ipynb`. It should report query `3ubpC`, length **570**, and **1,048** rows in the default view, then show plots, a structure viewer, and a session save/restore confirmation. Longer examples run their default analysis choices first. After completion, explore the display controls. For revised data, domains, filters, or motifs, start again from the cell that loads a fresh `Project`, then execute the following sections in order and apply your new control choices before registering views. Reusing an existing view name does not replace its earlier analysis; use a fresh project or a new unique view name.
 
 ## Data and working directory
 
@@ -31,7 +31,7 @@ The setup enables Colab's custom widget manager for the domain viewer, ipywidget
 - Rotate and zoom the py3Dmol structure; use available target controls to change the selected structure.
 - In the domain viewer, edit the PDB domain text and click **Apply**. Verify that the coloring and domain-centering buttons respond. **Reset** restores the initial ranges. If testing an edit before running a case study, reset it before registering the domains.
 - Hover over Plotly points, zoom, and switch the selected view. Changes should update the displayed data.
-- Adjust selection/profile controls, then rerun the later cells that lock the selected values and register a view. Changing a displayed control does not automatically rebuild every subsequent analysis.
+- Apply selection/profile choices before the cells that lock their values and register a view. If that view was already registered, reload a fresh project and work through the sections again, or choose a new unique view name. Display changes do not automatically rebuild subsequent analysis.
 
 Domain text uses **one-based inclusive PDB residues**; the notebooks explicitly convert it to zero-based half-open clipping ranges. GOLD's stated core is PDB residues **23–123**. See [usage](usage.md) for the API conventions.
 
