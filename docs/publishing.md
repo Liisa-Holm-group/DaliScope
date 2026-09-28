@@ -5,7 +5,7 @@ The public repository is [Liisa-Holm-group/DaliScope](https://github.com/Liisa-H
 ## Prepare a patch release
 
 1. Work on a branch and review the complete diff.
-2. Update `daliscope.__version__`, `CITATION.cff`, the download script's default tag, data instructions, release notes, and validation record together.
+2. Update `daliscope.__version__`, `CITATION.cff`, the download script's default tag, data instructions, notebook setup tags, Colab links, release notes, and validation record together.
 3. Install `.[notebook,packer,dev]`, run `python -m pip check` and `python -m pytest -q`, and execute the affected notebooks in fresh kernels with `scripts/validate_notebooks.py`. GOLD is required for the advanced example.
 4. Build with `python -m build`. Verify that the source distribution includes the reference requirements and three small packs, and that neither package includes GOLD or local files.
 5. Merge only after the Windows and Ubuntu GitHub Actions checks pass. Create the release from the tested commit, with its corresponding version tag.
@@ -21,8 +21,8 @@ Use the Release attachment basenames in `checksums.json`, with `bytes` and `sha2
 For example, with a validated tag and authenticated GitHub CLI:
 
 ```bash
-gh release create v0.1.1 --repo Liisa-Holm-group/DaliScope --verify-tag --title "DaliScope 0.1.1" --notes-file docs/release-notes.md
-gh release upload v0.1.1 /path/to/assets/GOLD.tar.gz /path/to/assets/daliscope-0.1.1-py3-none-any.whl /path/to/assets/daliscope-0.1.1.tar.gz /path/to/assets/DaliScope-0.1.1-source.zip /path/to/assets/checksums.json --repo Liisa-Holm-group/DaliScope
+gh release create v0.1.2 --repo Liisa-Holm-group/DaliScope --verify-tag --title "DaliScope 0.1.2" --notes-file docs/release-notes.md
+gh release upload v0.1.2 /path/to/assets/GOLD.tar.gz /path/to/assets/daliscope-0.1.2-py3-none-any.whl /path/to/assets/daliscope-0.1.2.tar.gz /path/to/assets/DaliScope-0.1.2-source.zip /path/to/assets/checksums.json --repo Liisa-Holm-group/DaliScope
 ```
 
 Once the release exists, `python scripts/download_example.py GOLD` downloads and verifies the optional pack. For earlier versions, pass the corresponding tag explicitly, such as `--tag v0.1.0`.

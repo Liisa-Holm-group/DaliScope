@@ -5,7 +5,6 @@ import sys
 
 import nbformat
 from nbclient import NotebookClient
-from jupyter_client import KernelManager
 
 
 def main():
@@ -19,17 +18,16 @@ def main():
     for path in args.notebooks:
         path = path.resolve()
         notebook = nbformat.read(path, as_version=4)
-        manager = KernelManager(kernel_name="python3")
-        # Use this interpreter, independently of any user-installed kernel spec.
-        manager.kernel_spec.argv = [sys.executable, "-m", "ipykernel_launcher", "-f", "{connection_file}"]
-        client = NotebookClient(notebook, km=manager, timeout=args.timeout,
+        client = NotebookClient(notebook, kernel_name="python3", timeout=args.timeout,
                                 resources={"metadata": {"path": str(path.parent)}})
+        # Let nbclient own its asynchronous manager and clean up on success or error.
+        # Blocking kernel channels prevent the event loop from enforcing cell timeouts.
+        manager = client.create_kernel_manager()
+        manager.kernel_spec.argv = [sys.executable, "-m", "ipykernel_launcher", "-f", "{connection_file}"]
         try:
             client.execute()
         finally:
             nbformat.write(notebook, output / path.name)
-            if manager.has_kernel:
-                manager.shutdown_kernel(now=True)
         print(f"PASS {path.name}: {sum(c.cell_type == 'code' for c in notebook.cells)} code cells", flush=True)
 
 

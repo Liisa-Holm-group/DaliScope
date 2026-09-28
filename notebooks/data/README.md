@@ -13,13 +13,13 @@ Raw alignments and packed targets differ because multiple alignments can map to 
 
 ## GOLD download
 
-The GOLD example is distributed with the `v0.1.1` GitHub release. Run from the repository root:
+The GOLD example is distributed with the `v0.1.2` GitHub release. Run from the repository root:
 
 ```bash
 python scripts/download_example.py GOLD
 ```
 
-The script checks SHA-256 against `datasets.json` before accepting the download. Before that release exists, use the original supplied GOLD pack in this directory. The large pack is intentionally excluded from regular Git commits.
+The script checks SHA-256 against `datasets.json` before accepting the download. The GOLD notebook downloads it automatically in Colab; local users run the command above. The large pack is intentionally excluded from regular Git commits.
 
 ## Provenance and terms
 

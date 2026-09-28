@@ -1,6 +1,7 @@
 import plotly.express as px
 import plotly.io as pio
-pio.renderers.default = "iframe"
+import sys
+pio.renderers.default = "colab" if "google.colab" in sys.modules else "iframe"
 from IPython.display import display, HTML
 
 import pandas as pd
