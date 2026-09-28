@@ -1,0 +1,15 @@
+include README.md LICENSE CITATION.cff
+recursive-include docs *.md *.png
+recursive-include tests *.py
+recursive-include scripts *.py
+recursive-include notebooks *.ipynb *.md *.json
+include notebooks/data/3ubpC_PDB25.tar.gz
+include notebooks/data/dotp_ISS.tar.gz
+include notebooks/data/ZN_full.tar.gz
+exclude notebooks/data/GOLD.tar.gz
+prune .venv
+prune .local-work
+prune .local-archive
+prune results
+prune notebooks/.ipynb_checkpoints
+global-exclude *.pyc *.pyo *.swp *.swo *-checkpoint.ipynb

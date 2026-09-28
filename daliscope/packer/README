@@ -1,0 +1,6 @@
+# Pack preparation
+
+See ../../docs/prepare-data.md for the supported command and external database schemas.
+
+Use `daliscope-pack --help`, or `python -m daliscope.packer.make_colab_pack --help`.
+Database paths are required arguments. Server uploads run only with --upload-to.

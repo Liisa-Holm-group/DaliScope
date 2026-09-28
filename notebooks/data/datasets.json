@@ -1,0 +1,54 @@
+{
+  "3ubpC_PDB25": {
+    "file": "3ubpC_PDB25.tar.gz",
+    "sha256": "95ea30e91a39c21f52f60b7f52fb88740c40bcb921cad263a935bd6fda11ac63",
+    "bytes": 3509644,
+    "query_id": "3ubpC",
+    "query_length": 570,
+    "packed_targets": 1048,
+    "raw_alignments": 1120,
+    "namespace_ids": [
+      1
+    ],
+    "distribution": "repository"
+  },
+  "dotp_ISS": {
+    "file": "dotp_ISS.tar.gz",
+    "sha256": "5f8502b3472583fed0c433091b1749cb035dccb0b407731e4675f3cc8737b538",
+    "bytes": 4728731,
+    "query_id": "9b8eA",
+    "query_length": 222,
+    "packed_targets": 814,
+    "raw_alignments": 816,
+    "namespace_ids": [
+      2
+    ],
+    "distribution": "repository"
+  },
+  "GOLD": {
+    "file": "GOLD.tar.gz",
+    "sha256": "d3fc732890400446bd128fa178e9a3e13c3c28b1dac5c3656c76459185f660ed",
+    "bytes": 52510689,
+    "query_id": "5tdqA",
+    "query_length": 123,
+    "packed_targets": 12245,
+    "raw_alignments": 12316,
+    "namespace_ids": [
+      2
+    ],
+    "distribution": "release-asset"
+  },
+  "ZN_full": {
+    "file": "ZN_full.tar.gz",
+    "sha256": "52d24e8a590c9fe6cdb6ba16514300a06ad5c17b3f18c06102a2d044ea0f08ef",
+    "bytes": 6060757,
+    "query_id": "c9kdA",
+    "query_length": 1724,
+    "packed_targets": 1573,
+    "raw_alignments": 1584,
+    "namespace_ids": [
+      2
+    ],
+    "distribution": "repository"
+  }
+}

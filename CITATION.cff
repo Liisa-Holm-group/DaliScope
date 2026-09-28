@@ -1,0 +1,11 @@
+cff-version: 1.2.0
+message: "Please cite this software and the DALI/data sources used in your analysis."
+title: DaliScope
+type: software
+version: 0.1.0
+authors:
+  - name: Liisa Holm group
+    email: hao.liu@helsinki.fi
+repository-code: https://github.com/Liisa-Holm-group/DaliScope
+license: MIT
+abstract: Notebook-based exploration of DALI structural search results.

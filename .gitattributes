@@ -1,0 +1,8 @@
+*.py text eol=lf
+*.md text eol=lf
+*.toml text eol=lf
+*.yml text eol=lf
+*.csh text eol=lf
+*.ipynb text eol=lf
+*.tar.gz binary
+*.png binary

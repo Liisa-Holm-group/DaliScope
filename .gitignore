@@ -1,0 +1,29 @@
+# Python and Jupyter generated files
+__pycache__/
+*.py[cod]
+*.nbc
+*.nbi
+.ipynb_checkpoints/
+*.egg-info/
+.venv/
+venv/
+build/
+dist/
+.pytest_cache/
+.coverage
+htmlcov/
+# Local research outputs and release staging
+.local-work/
+.local-archive/
+results/
+*.log
+# Optional full case-study dataset (distributed with releases)
+notebooks/data/GOLD.tar.gz
+# Editor and operating-system files
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+*~
