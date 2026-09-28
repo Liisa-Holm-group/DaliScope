@@ -20,6 +20,10 @@ The query metadata length must match the sequence length and number of query C-a
 
 Alignment blocks in `segments.tsv` use **one-based** DALI start positions and positive lengths. The loader subtracts one from the starts. This differs from the half-open ranges accepted by the clipping API.
 
+`query_meta.tsv`'s `domain_string` records the PUU suggestion using **one-based, inclusive PDB/sequence residue numbers**, with commas separating domains and underscores separating discontinuous segments. For example, `1-50_101-150, 151-200` represents two domains. The domain viewer displays this convention. Convert it with `pdb_domain_string_to_clipping` before calling the clipping API; the example becomes `0-50_100-150, 150-200`.
+
+The fingerprint/community API also uses one-based inclusive ranges. Convert clipping provenance with `clipping_ranges_to_pdb` instead of reusing its numeric boundaries unchanged. This preserves both endpoints and supports multiple segments. See the [usage guide](usage.md) for the corresponding calls.
+
 ## Optional annotations
 
 | File | Fields | Purpose |

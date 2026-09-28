@@ -800,7 +800,7 @@ PUU domains: {self.puu_domains}
         # 1. Do-nothing default for empty query strings
         if not query_str or not query_str.strip():
             mask = pd.Series(False, index=source_df.index)
-            print(f"No query string provided. Created empty subset '{subset_name}'.")
+            print("Empty query string: no subset registered; existing views are unchanged.")
             return mask
 
         # 2. Evaluate boolean condition safely
@@ -966,10 +966,10 @@ PUU domains: {self.puu_domains}
         session_dir/
             manifest.json
             views/
-                {name}.parquet
-                {name}_arrays.pkl   (for numpy object columns)
+                view_<storage_id>.parquet
+                view_<storage_id>_arrays.pkl   (for numpy object columns)
             models/
-                {name}.pkl
+                model_<storage_id>.pkl
             figures/
                 (populated by export_figure())
         """
@@ -995,8 +995,9 @@ PUU domains: {self.puu_domains}
         }
 
         # --- views ---
-        for name, df in self.views.items():
-            safe = _safe_name(name)
+        for storage_id, (name, df) in enumerate(self.views.items()):
+            # Display names can sanitize to the same string; storage IDs cannot.
+            safe = f"view_{storage_id:06d}"
             array_cols  = [c for c in df.columns
                            if df[c].dtype == object
                            and _col_contains_arrays(df[c])]
@@ -1025,8 +1026,8 @@ PUU domains: {self.puu_domains}
             }
 
         # --- models ---
-        for name, artifact in self.models.items():
-            safe = _safe_name(name)
+        for storage_id, (name, artifact) in enumerate(self.models.items()):
+            safe = f"model_{storage_id:06d}"
             pkl_path = out / "models" / f"{safe}.pkl"
             with open(pkl_path, "wb") as f:
                 pickle.dump(artifact, f, protocol=pickle.HIGHEST_PROTOCOL)

@@ -1,43 +1,34 @@
-# Publishing DaliScope to the group organization
+# Publishing DaliScope
 
-## Create the repository
+The public repository is [Liisa-Holm-group/DaliScope](https://github.com/Liisa-Holm-group/DaliScope). Maintain its clone in `DaliScope`; retain the original project backup and laboratory databases separately.
 
-Create an **empty** repository named `DaliScope` under `Liisa-Holm-group`. Leave automatic README, license, and .gitignore creation disabled: these files are supplied here. The agreed software license is MIT with the copyright holder Liisa Holm group. Review the original scientific case-study interpretations before public release.
+## Prepare a patch release
 
-The existing working directory is associated with a different origin. Keep that history and remote intact. Publish the clean exported release directory as the new repository.
+1. Work on a branch and review the complete diff.
+2. Update `daliscope.__version__`, `CITATION.cff`, the download script's default tag, data instructions, release notes, and validation record together.
+3. Install `.[notebook,packer,dev]`, run `python -m pip check` and `python -m pytest -q`, and execute the affected notebooks in fresh kernels with `scripts/validate_notebooks.py`. GOLD is required for the advanced example.
+4. Build with `python -m build`. Verify that the source distribution includes the reference requirements and three small packs, and that neither package includes GOLD or local files.
+5. Merge only after the Windows and Ubuntu GitHub Actions checks pass. Create the release from the tested commit, with its corresponding version tag.
 
-## Publish the prepared snapshot
+The software license is MIT, copyright Liisa Holm group. Contact: `hao.liu@helsinki.fi`. A manuscript describing DaliScope is being prepared for submission; update this status after submission and add the paper citation when available.
 
-From the exported release directory:
+## Attach files
 
-```bash
-git init -b main
-git add .
-git commit -m "Prepare DaliScope with installation, tutorials, and validation"
-git remote add origin https://github.com/Liisa-Holm-group/DaliScope.git
-git push -u origin main
-```
+Attach the wheel, source distribution, a clean source ZIP, and a checksum manifest. Attach the unchanged `GOLD.tar.gz` as well: it is about 50 MiB and excluded from ordinary Git commits. Its dataset checksum is in `notebooks/data/datasets.json`.
 
-The contact is `hao.liu@helsinki.fi`. The repository includes an MIT LICENSE and a CITATION.cff software citation. A manuscript describing DaliScope is being prepared for submission. Update this status after submission and add the paper citation when its details become available.
+Use the Release attachment basenames in `checksums.json`, with `bytes` and `sha256` for each file. Keep every attachment in one directory for verification; do not encode the maintainer's local folder layout in the manifest. The manifest itself is not included in its own hash list.
 
-## Distribute the optional GOLD data
-
-`GOLD.tar.gz` is about 50 MiB and is excluded from regular Git commits. Once the code is published, attach the original pack as a GitHub Release asset named `GOLD.tar.gz` on tag `v0.1.0`. Its checksum is in `notebooks/data/datasets.json`.
-
-With authenticated GitHub CLI, from the prepared repository:
+For example, with a validated tag and authenticated GitHub CLI:
 
 ```bash
-gh release create v0.1.0 --repo Liisa-Holm-group/DaliScope --title "DaliScope 0.1.0" --notes-file docs/release-notes.md
-gh release upload v0.1.0 /path/to/original/GOLD.tar.gz --repo Liisa-Holm-group/DaliScope
+gh release create v0.1.1 --repo Liisa-Holm-group/DaliScope --verify-tag --title "DaliScope 0.1.1" --notes-file docs/release-notes.md
+gh release upload v0.1.1 /path/to/assets/GOLD.tar.gz /path/to/assets/daliscope-0.1.1-py3-none-any.whl /path/to/assets/daliscope-0.1.1.tar.gz /path/to/assets/DaliScope-0.1.1-source.zip /path/to/assets/checksums.json --repo Liisa-Holm-group/DaliScope
 ```
 
-After that release exists, `python scripts/download_example.py GOLD` downloads the verified file for the advanced notebook. Until then, retain the supplied local GOLD file and copy it into `notebooks/data/` when running that example.
+Once the release exists, `python scripts/download_example.py GOLD` downloads and verifies the optional pack. For earlier versions, pass the corresponding tag explicitly, such as `--tag v0.1.0`.
 
-## Final checks
+## Preserve reproducibility
 
-- Confirm the repository owner/name and chosen visibility.
-- Confirm MIT and group copyright, contact, and scientific descriptions.
-- Verify bundled structures/annotations and their provenance with the group; third-party data keeps its original terms.
-- Check GitHub Actions results after the push; local Windows checks do not establish Linux or other Python-version support.
-- Open the quickstart in a browser and check 3D/widget interactions.
-- Keep the original project backup and laboratory databases outside the new repository.
+Keep earlier version tags and released artifacts available. Document any coordinate or parameter corrections that change historical results, and avoid silently replacing earlier scientific outputs. Record the DaliScope version, data checksum, domains, filters, and clustering/motif parameters with each analysis.
+
+Inspect current annotation summaries and structures when interpreting community modules. Module numbers can change between runs. Browser widget interactions and production laboratory databases require their own checks; the validation record describes what was executed locally and on GitHub.

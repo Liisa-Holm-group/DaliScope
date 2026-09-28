@@ -5,6 +5,7 @@ import traitlets
 from IPython.display import display
 
 from .domnet_viewer_core import DEFAULT_COLORS
+from ..mechanics.domain_ranges import pdb_domain_string_to_clipping
 
 import anywidget
 import traitlets
@@ -269,7 +270,11 @@ class DomNetCanvas(anywidget.AnyWidget):
 
 
 class DomNetViewer:
-    """Persistent Jupyter DomNet viewer powered by pure anywidget."""
+    """Persistent Jupyter viewer with one-based inclusive PDB domain ranges.
+
+    Use ``clipping_domain_string`` when passing the displayed selection to the
+    zero-based half-open clipping API. ``domain_string`` remains the UI value.
+    """
 
     def __init__(
         self,
@@ -292,9 +297,9 @@ class DomNetViewer:
         # --- Controls UI ---
         self._domain_widget = widgets.Text(
             value=str(domain_string),
-            description="Domains:",
+            description="PDB domains:",
             layout=widgets.Layout(width="100%"),
-            style={"description_width": "70px"},
+            style={"description_width": "100px"},
         )
 
         self._apply_button = widgets.Button(
@@ -314,7 +319,9 @@ class DomNetViewer:
         )
 
         self._controls = widgets.VBox(
-            [self._domain_widget, buttons, self._status]
+            [self._domain_widget,
+             widgets.HTML("Use one-based inclusive residues: 1-100, 101-200_300-400."),
+             buttons, self._status]
         )
 
         # --- Canvas Widget ---
@@ -344,6 +351,11 @@ class DomNetViewer:
         val = str(value)
         self._domain_widget.value = val
         self.canvas.domain_string = val
+
+    @property
+    def clipping_domain_string(self):
+        """The current UI ranges converted to zero-based half-open clipping text."""
+        return pdb_domain_string_to_clipping(self.domain_string)
 
     @property
     def pdb_text(self):
