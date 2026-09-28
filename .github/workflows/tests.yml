@@ -25,3 +25,22 @@ jobs:
       - run: python -m pytest -q
       - run: python scripts/validate_notebooks.py notebooks/01_quickstart.ipynb
       - run: python -m build
+
+  colab-dependencies:
+    runs-on: ubuntu-latest
+    env:
+      MPLBACKEND: Agg
+      PYTHONUTF8: '1'
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
+        with:
+          python-version: '3.12'
+          cache: pip
+          cache-dependency-path: pyproject.toml
+      # Match the core versions declared by Google's colabtools setup.py.
+      # This is dependency compatibility coverage; it is not a hosted frontend test.
+      - run: python -m pip install -e ".[colab,packer,dev]" "ipython==7.34.0" "ipykernel==6.17.1" "pandas==2.2.3" "numpy==2.0.2"
+      - run: python -m pip check
+      - run: python -m pytest -q
+      - run: python scripts/validate_notebooks.py notebooks/01_quickstart.ipynb notebooks/RunDaliScope-1.ipynb notebooks/SignatureTest.ipynb

@@ -2,7 +2,7 @@
 
 ## Environment and input
 
-Follow the root README to install DaliScope, then select the DaliScope Jupyter kernel. Install before launching the kernel. If you update packages in an existing session, restart that kernel once and run from the beginning.
+Use the [Colab entry](colab.md) for browser setup, or follow the root README to install locally and select the DaliScope Jupyter kernel. Install before launching the kernel. If you update packages in an existing session, restart that kernel once and run from the beginning.
 
 Start with `notebooks/01_quickstart.ipynb`. It locates the repository whether the kernel starts in the root or `notebooks`. Longer tutorials set their working directory to `notebooks`, where paths such as `data/ZN_full.tar.gz` apply.
 

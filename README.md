@@ -6,12 +6,27 @@ DaliScope analyzes an existing DALI data pack. Running a DALI search and provisi
 
 ![Example DALI hit landscape](docs/images/overview.png)
 
-## Quick start
+## Run in your browser with Colab
 
-Use Python 3.12 for the reference environment. The package requires Python 3.10 or newer; platform and version coverage are recorded in [validation](docs/validation.md).
+Start with **[01_quickstart.ipynb in Colab](https://colab.research.google.com/github/Liisa-Holm-group/DaliScope/blob/v0.1.2/notebooks/01_quickstart.ipynb)**. Connect to a CPU runtime, then choose **Runtime → Run all**. The first setup cell downloads the matching DaliScope source and example packs, installs the Colab dependencies, and enables custom widgets. You do not need to install Python locally or choose a local Jupyter kernel.
+
+| Notebook | Purpose | Colab |
+| --- | --- | --- |
+| `01_quickstart.ipynb` | Short introduction; included 3ubpC pack | [Open in Colab](https://colab.research.google.com/github/Liisa-Holm-group/DaliScope/blob/v0.1.2/notebooks/01_quickstart.ipynb) |
+| `RunDaliScope-1.ipynb` | Comprehensive domain and motif workflow; included 3ubpC pack | [Open in Colab](https://colab.research.google.com/github/Liisa-Holm-group/DaliScope/blob/v0.1.2/notebooks/RunDaliScope-1.ipynb) |
+| `SignatureTest.ipynb` | Multidomain and sequence-signature case study; included ZN pack | [Open in Colab](https://colab.research.google.com/github/Liisa-Holm-group/DaliScope/blob/v0.1.2/notebooks/SignatureTest.ipynb) |
+| `WorkedExample-6.ipynb` | GOLD fold communities; automatically downloads the optional GOLD pack in Colab | [Open in Colab](https://colab.research.google.com/github/Liisa-Holm-group/DaliScope/blob/v0.1.2/notebooks/WorkedExample-6.ipynb) |
+
+These links use **v0.1.2** so notebook code and installed source match. After the default example finishes, explore its display controls. To change analysis inputs or domain/filter/motif choices, reload the project and execute subsequent sections in order, applying the new choices before registering views; existing view names are retained on rerun. The comprehensive notebook leaves its expensive community step off by default; GOLD runs community analysis. Case-study choices and biological interpretations apply to their frozen input datasets.
+
+See the [Colab guide](docs/colab.md) for runtime setup, browser interaction, and downloading outputs. Actual Colab frontend interaction has not yet been verified; the [validation record](docs/validation.md) distinguishes executed checks from this limit.
+
+## Run locally with Python 3.12
+
+Use **Python 3.12** for the reference environment. Check `python --version` before creating the environment; the commands below assume it reports 3.12. If your default Python is 3.13, install/select Python 3.12 and use its executable for the venv command, or use the independent Conda alternative below. The package declares Python 3.10 or newer; tested platform/version coverage is recorded in [validation](docs/validation.md).
 
 ```bash
-git clone https://github.com/Liisa-Holm-group/DaliScope.git
+git clone --branch v0.1.2 https://github.com/Liisa-Holm-group/DaliScope.git
 cd DaliScope
 python -m venv .venv
 ```
@@ -37,16 +52,28 @@ python -m ipykernel install --user --name daliscope --display-name "Python (Dali
 python -m jupyterlab
 ```
 
-Open **`notebooks/01_quickstart.ipynb`**, select the **Python (DaliScope)** kernel, and run the cells from top to bottom. The small `3ubpC_PDB25.tar.gz` example is included in the repository. The notebook loads it, plots the hit landscape and domain architecture, creates a filtered view, shows a 3D superimposition, and saves a session.
+Open **`notebooks/01_quickstart.ipynb`**, select the **Python (DaliScope)** kernel, and run the cells from top to bottom. The small `3ubpC_PDB25.tar.gz` example is included in the repository. The notebook loads it, plots the hit landscape and domain architecture, creates a filtered view, shows a 3D superimposition, and saves a session. The Colab setup cell performs no installation in a local notebook.
+
+### Optional Conda alternative
+
+If you already use Conda, clone the repository as above, enter its root directory, and use these commands **instead of creating a venv**. `conda run` does not require shell activation:
+
+```bash
+conda create -n daliscope python=3.12 pip -y
+conda run -n daliscope python -m pip install -e ".[notebook]"
+conda run -n daliscope python -m ipykernel install --user --name daliscope --display-name "Python (DaliScope)"
+conda run --no-capture-output -n daliscope python -m jupyterlab
+```
 
 ## Documentation
 
+- [Colab guide](docs/colab.md): browser setup, interactive controls, and cloud outputs.
 - [Usage guide](docs/usage.md): choosing data, views, parameters, plots, and saved sessions.
 - [Data-pack format](docs/data-format.md): required files, table columns, and coordinate conventions.
 - [Preparing your own data](docs/prepare-data.md): a portable pack generator and its database requirements.
 - [Examples and data provenance](notebooks/data/README.md): included datasets and the optional GOLD download.
 - [Validation](docs/validation.md): checks performed and practical limitations.
-- [Release notes](docs/release-notes.md): fixes and analysis changes in version 0.1.1.
+- [Release notes](docs/release-notes.md): changes in the current release.
 - [Publishing guide](docs/publishing.md): creating the group repository and distributing larger data.
 
 ## Tutorials
