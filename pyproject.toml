@@ -41,6 +41,9 @@ exclude = ["*.tests", "*.tests.*"]
 [tool.setuptools]
 include-package-data = false
 
+[tool.setuptools.package-data]
+"daliscope.packer" = ["*.csh", "data/pfam_names.tsv", "data/README.md"]
+
 [tool.pytest.ini_options]
 testpaths = ["tests"]
 

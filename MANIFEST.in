@@ -3,6 +3,8 @@ recursive-include docs *.md *.png
 include docs/requirements-windows-py312.txt
 recursive-include tests *.py
 recursive-include scripts *.py
+include daliscope/packer/make_colab_pack.csh
+recursive-include daliscope/packer/data *.tsv *.md
 recursive-include notebooks *.ipynb *.md *.json
 include notebooks/data/3ubpC_PDB25.tar.gz
 include notebooks/data/dotp_ISS.tar.gz

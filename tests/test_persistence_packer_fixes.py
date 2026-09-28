@@ -6,6 +6,7 @@ import pickle
 import sqlite3
 import subprocess
 import sys
+import tarfile
 
 import numpy as np
 import pandas as pd
@@ -132,3 +133,51 @@ def test_pack_cli_rejects_invalid_query_before_overwriting(generator_inputs, tmp
     assert "Query.pdb" in result.stderr
     assert destination.read_bytes() == previous
     assert not list(output.glob("daliscope-pack-*"))
+
+
+
+def test_pack_cli_bundles_pfam_descriptions_from_an_unrelated_directory(generator_inputs, tmp_path):
+    files = generator_inputs
+    with sqlite3.connect(files["pfam"]) as conn:
+        conn.execute("INSERT INTO hmmer_hits VALUES ('1abcA', 'PF00001', 1e-10, 1, 5, 'PDB')")
+        conn.execute("INSERT INTO pfam_entries VALUES ('PF00001', 'CL0192')")
+    files["names"].unlink()  # No external descriptions are available to this invocation.
+    foreign = tmp_path / "unrelated"
+    foreign.mkdir()
+    output = tmp_path / "output"
+    command = [
+        sys.executable, "-m", "daliscope.packer.make_colab_pack",
+        str(files["tsv"]), "PDB", "test", str(files["pdb"]), "A", str(files["dat"]),
+        "--ledger-db", str(files["ledger"]), "--shard-dir", str(files["shards"]),
+        "--pfam-db", str(files["pfam"]), "--output-dir", str(output),
+    ]
+    result = subprocess.run(command, cwd=foreign, capture_output=True, text=True,
+                            env={**os.environ, "PYTHONUTF8": "1"})
+    assert result.returncode == 0, result.stderr + result.stdout
+    archive = output / "test.tar.gz"
+    with tarfile.open(archive) as pack:
+        descriptions = pd.read_csv(pack.extractfile("mini_pfam_names.tsv"), sep="\t",
+                                   dtype=str, keep_default_na=False)
+    assert descriptions.to_dict("records") == [{
+        "pfam": "PF00001", "clan": "CL0192", "clan_short": "GPCR_A",
+        "short": "7tm_1", "name": "7 transmembrane receptor (rhodopsin family)",
+    }]
+    loaded = Project.load_pack(str(archive))
+    assert next(iter(loaded.views.values())).iloc[0]["pfam"] == "PF00001"
+    assert not list(output.glob("daliscope-pack-*"))
+
+
+def test_mini_names_uses_bundled_reference_outside_checkout(tmp_path):
+    import daliscope.packer.mini_pfam_names as module
+
+    (tmp_path / "pfam.tsv").write_text("query_accession\nPF00001\nPF10417\nPF00001\n", encoding="utf-8")
+    result = subprocess.run([sys.executable, str(Path(module.__file__).resolve())],
+                            cwd=tmp_path, capture_output=True, text=True,
+                            env={**os.environ, "PYTHONUTF8": "1"})
+    assert result.returncode == 0, result.stderr + result.stdout
+    descriptions = pd.read_csv(tmp_path / "mini_pfam_names.tsv", sep="\t",
+                               dtype=str, keep_default_na=False).set_index("pfam")
+    assert set(descriptions.index) == {"PF00001", "PF10417"}
+    assert descriptions.loc["PF00001", "short"] == "7tm_1"
+    assert descriptions.loc["PF10417", "clan"] == "PF10417"
+    assert descriptions.loc["PF10417", "clan_short"] == ""

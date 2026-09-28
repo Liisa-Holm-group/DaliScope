@@ -24,7 +24,9 @@ Alignment blocks in `segments.tsv` use **one-based** DALI start positions and po
 
 The fingerprint/community API also uses one-based inclusive ranges. Convert clipping provenance with `clipping_ranges_to_pdb` instead of reusing its numeric boundaries unchanged. This preserves both endpoints and supports multiple segments. See the [usage guide](usage.md) for the corresponding calls.
 
-## Optional annotations
+## Annotation contents
+
+Official [DALI data packs](http://ekhidna2.biocenter.helsinki.fi/dali/colab.html) include Pfam hits and their descriptions. DaliScope reads them from the pack itself; no external Pfam database is needed for analysis.
 
 | File | Fields | Purpose |
 | --- | --- | --- |
@@ -33,7 +35,7 @@ The fingerprint/community API also uses one-based inclusive ranges. Convert clip
 | `mini_ligand.tsv` | `pdb_id`, `chain_id`, `res_name`, `hetatm` | Ligand records for PDB targets |
 | `mini_ligand_names.tsv` | `res_name`, `compound` | Ligand names |
 
-Without Pfam annotations, retained hits are labeled `Unassigned`. The standard preparation command requires a Pfam database; a custom producer can omit the annotation files.
+The local preparation command requires a Pfam annotation database and bundles descriptions selected from its packaged reference (or an explicit `--pfam-names` replacement). The loader also accepts custom packs that omit these annotation files; in that compatibility mode, retained hits are labeled `Unassigned`. Ligand files are optional.
 
 ## Namespaces and provenance
 

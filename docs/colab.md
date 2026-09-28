@@ -4,11 +4,11 @@
 
 Open one of the versioned links in the [README](../README.md#run-in-your-browser-with-colab), connect to a runtime, and select **Runtime → Run all**. A standard **CPU** runtime is sufficient for the tutorial code; GPU acceleration is not used by these workflows.
 
-The first code cell handles Colab setup. It obtains **DaliScope v0.1.4** in `/content/DaliScope`, installs the package with `.[colab]` in the runtime's Python environment, and enables Google's custom widget manager. After live installation it refreshes Matplotlib's cached backend discovery so the running kernel can request the newly installed widget backend. Installing Colab dependencies is done once per runtime. A GitHub notebook link supplies only the notebook, so the source clone and data files are still necessary; the setup cell provides them automatically.
+The first code cell handles Colab setup. It obtains **DaliScope v0.1.5** in `/content/DaliScope`, installs the package with `.[colab]` in the runtime's Python environment, and enables Google's custom widget manager. After live installation it refreshes Matplotlib's cached backend discovery so the running kernel can request the newly installed widget backend. Installing Colab dependencies is done once per runtime. A GitHub notebook link supplies only the notebook, so the source clone and data files are still necessary; the setup cell provides them automatically.
 
 Use the Colab runtime's kernel. Local venv creation, Conda commands, ipykernel registration, and the local **Python (DaliScope)** kernel selection are not part of this procedure. In a local Jupyter session, the first Colab setup cell is a no-op and the README's local installation applies.
 
-The v0.1.4 notebooks use generic **Python 3** kernel metadata to avoid Colab's unrecognized local-runtime notice. This does not select your local environment: when using local Jupyter, still choose the registered **Python (DaliScope)** kernel described in the README.
+The v0.1.5 notebooks use generic **Python 3** kernel metadata to avoid Colab's unrecognized local-runtime notice. This does not select your local environment: when using local Jupyter, still choose the registered **Python (DaliScope)** kernel described in the README.
 
 Start with `01_quickstart.ipynb`. It should report query `3ubpC`, length **570**, and **1,048** rows in the default view, then show plots, a structure viewer, and a session save/restore confirmation. Longer examples run their default analysis choices first. After completion, explore the display controls. For revised data, domains, filters, or motifs, start again from the cell that loads a fresh `Project`, then execute the following sections in order and apply your new control choices before registering views. Reusing an existing view name does not replace its earlier analysis; use a fresh project or a new unique view name.
 
@@ -19,7 +19,7 @@ The cloned repository includes the 3ubpC, dotp, and ZN example packs. Quickstart
 `WorkedExample2.ipynb` uses the optional **GOLD** pack, approximately 50 MiB. In Colab it downloads the release asset when absent and verifies its SHA-256 against `notebooks/data/datasets.json` before analysis. To download or verify it manually in a Colab code cell:
 
 ```python
-!python /content/DaliScope/scripts/download_example.py GOLD --tag v0.1.4
+!python /content/DaliScope/scripts/download_example.py GOLD --tag v0.1.5
 ```
 
 For your own pack, upload it through Colab's Files panel and set `pack_path` to its absolute runtime path, such as `/content/my-query.tar.gz`. It must follow the [data-pack contract](data-format.md); a lone PDB is not a DaliScope input pack.
@@ -69,7 +69,7 @@ Download outputs before deleting or losing the runtime. Saving the notebook to D
 
 ## Source version and validation limits
 
-The v0.1.4 Colab links, setup source checkout, and GOLD release selection use the same version. This patch standardizes the tutorial names; scientific algorithms, tutorial computations, and frozen example data are unchanged from 0.1.3. Keep that version fixed when recording an analysis. Record the data checksum, domains, filters, and clustering/motif parameters alongside outputs; upgrading source or correcting domain ranges can change results.
+The v0.1.5 Colab links, setup source checkout, and GOLD release selection use the same version. This patch bundles the Pfam descriptions reference for local pack generation; scientific algorithms, tutorial computations, and frozen example data are unchanged from 0.1.4. Keep that version fixed when recording an analysis. Record the data checksum, domains, filters, and clustering/motif parameters alongside outputs; upgrading source or correcting domain ranges can change results.
 
 The 0.1.3 comprehensive workflow completed all 29 non-empty tutorial code cells in a fresh hosted Colab runtime on 28 September 2026. Setup installed the dependencies and refreshed backend discovery automatically. After the final analysis, switching the existing hit-plane widget to `dom_1` visibly updated the axes and plotted points. This pre-release check used the public source commit, with only the initial clone adapted to its branch because the release tag was not yet available; see [validation](validation.md) for exact provenance.
 
