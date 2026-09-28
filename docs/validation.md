@@ -1,8 +1,20 @@
 # Validation record
 
+## 0.1.5 bundled Pfam descriptions
+
+The local packer now defaults to the installed `daliscope/packer/data/pfam_names.tsv` instead of requiring a descriptions table outside the repository. The explicit `--pfam-names` option remains available. The README links to the official self-contained DALI data-pack service and clarifies that analysis reads Pfam data from the pack itself.
+
+The fixed official Pfam 38.2 table contains **30,134 unique families**. Independent comparison with its upstream archive verified the only changes: adding a five-column header and filling empty `clan` fields with the Pfam accession. Other fields, including empty `clan_short`, whitespace, and row order, are preserved. All **760 rows / 3,800 fields** of the originally supplied mini descriptions match exactly. This does not establish the contents of the unavailable private full table. Source URLs, hashes, conversion, and CC0-1.0 terms are recorded in the [bundled reference notes](../daliscope/packer/data/README.md).
+
+The complete Windows unit suite passed **49 tests** in **36.41 seconds**, with the same 13 existing Infomap/ipympl/traitlets warnings. The two new checks exercise default pack generation from an unrelated directory without an external names table, and standalone mini extraction preserving unassigned clan labels. Existing explicit names-table generation and invalid-query protection remain covered.
+
+The wheel and source distribution include the full reference, its source/license notes, and the compatibility Bash wrapper; the reference bytes match the recorded SHA-256 in both archives. A wheel installed into a separate directory with `--no-deps --no-index --target` passed default mini extraction and generated a loadable synthetic pack from an unrelated working directory, without `--pfam-names`. Module paths were checked to ensure the test used the installed wheel rather than the source checkout. The wrapper was checked for inclusion; it was not executed on Windows.
+
+All four notebook schemas passed validation. Parsed notebooks are identical to 0.1.4 after normalizing only `v0.1.4` to `v0.1.5`; scientific code, parameters, metadata, cell IDs, and example data are unchanged, and source notebooks contain no executed output. The computational and hosted/frontend evidence below remains historical; this patch does not claim another full GOLD run or new hosted mouse checks.
+
 ## 0.1.4 notebook naming update
 
-The current tutorials are `RunDaliScope.ipynb`, `WorkedExample1.ipynb`, and `WorkedExample2.ipynb`; `01_quickstart.ipynb` retains its name. README and notebook references, Colab links/setup tags, test paths, and release downloads use the same 0.1.4 version.
+The 0.1.4 tutorials are `RunDaliScope.ipynb`, `WorkedExample1.ipynb`, and `WorkedExample2.ipynb`; `01_quickstart.ipynb` retains its name. README and notebook references, Colab links/setup tags, test paths, and release downloads use the same 0.1.4 version.
 
 All four notebook schemas were validated and their parsed contents compared with the 0.1.3 originals. The only notebook changes are the requested filenames/display metadata and filename/version references; computational code, analysis parameters, cell IDs, and frozen inputs are preserved. Source notebooks contain no executed outputs. The Windows Colab-setup and figure-lifecycle tests passed **14 tests**, with 11 existing upstream warnings, using the renamed comprehensive notebook. GitHub Actions executes the quickstart, `RunDaliScope.ipynb`, and `WorkedExample1.ipynb` using their new paths.
 

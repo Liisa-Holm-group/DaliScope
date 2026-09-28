@@ -32,7 +32,11 @@ def build_parser():
     parser.add_argument("--ledger-db", type=Path, required=True, help="Protein SQLite ledger")
     parser.add_argument("--shard-dir", type=Path, required=True, help="Directory of protein NPZ shards")
     parser.add_argument("--pfam-db", type=Path, required=True, help="Pfam annotation SQLite database")
-    parser.add_argument("--pfam-names", type=Path, required=True, help="Full Pfam description TSV")
+    parser.add_argument(
+        "--pfam-names", type=Path,
+        default=Path(__file__).resolve().parent / "data" / "pfam_names.tsv",
+        help="Full Pfam description TSV (default: bundled Pfam 38.2 reference)",
+    )
     parser.add_argument("--ligand-db", type=Path, help="Optional PDB ligand SQLite database")
     parser.add_argument("--output-dir", type=Path, default=Path.cwd())
     parser.add_argument("--overwrite", action="store_true", help="Replace an existing output pack")

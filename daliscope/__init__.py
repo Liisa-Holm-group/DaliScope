@@ -1,3 +1,3 @@
 """DaliScope: exploration and visualization of DALI structural searches."""
 
-__version__ = "0.1.4"
+__version__ = "0.1.5"

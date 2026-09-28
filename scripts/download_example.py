@@ -11,7 +11,7 @@ from urllib.request import urlopen
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("dataset", choices=("GOLD",))
-    parser.add_argument("--tag", default="v0.1.4", help="GitHub release tag")
+    parser.add_argument("--tag", default="v0.1.5", help="GitHub release tag")
     args = parser.parse_args()
     root = Path(__file__).resolve().parents[1]
     item = json.loads((root / "notebooks/data/datasets.json").read_text(encoding="utf-8"))[args.dataset]
