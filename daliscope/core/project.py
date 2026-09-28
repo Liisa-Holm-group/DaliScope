@@ -800,7 +800,7 @@ PUU domains: {self.puu_domains}
         # 1. Do-nothing default for empty query strings
         if not query_str or not query_str.strip():
             mask = pd.Series(False, index=source_df.index)
-            print(f"No query string provided. Created empty subset '{subset_name}'.")
+            print("Empty query string: no subset registered; existing views are unchanged.")
             return mask
 
         # 2. Evaluate boolean condition safely

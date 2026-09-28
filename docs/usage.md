@@ -18,9 +18,9 @@ project, FULL_DF, FULL_VIEW = load_and_inspect_project(pack_path)
 ## Read the overview
 
 - `z_score` is supplied by the DALI search. Clipping does not recompute it.
-- `query_coverage` and `target_coverage` divide aligned length by full sequence length.
+- `query_coverage` and `target_coverage` divide aligned length by the full query and target sequence lengths, respectively, including in clipped views. A small clipped domain can have low query coverage despite being almost completely aligned; these fractions alone do not establish a single-domain or multidomain architecture.
 - `sequence_identity` is an aligned-residue fraction between 0 and 1.
-- `rmsd` is the current view's superimposition metric. Domain views recompute their metrics.
+- `rmsd` is the current view's superimposition metric. Domain clipping recomputes a uniform least-squares fit over the retained aligned residues. Row-filtered subsets, including `_FOLD` views, inherit the parent fit and metrics.
 - `pfam` and `clan` describe the aligned target region. `Unassigned` indicates an annotation gap, rather than an established new function.
 
 Automatic `FILTERED_0` and `FILTERED_1` populations are exploratory selections. Their names do not establish a biological classification; inspect the structures and annotations.
@@ -40,14 +40,18 @@ The clipping API takes **zero-based, half-open query ranges**: the start is incl
 
 ```python
 from daliscope.mechanics.metrics import register_multiple_domains
+from daliscope.mechanics.domain_ranges import pdb_domain_string_to_clipping
 from daliscope.analysis.occupancy import create_fold_subset
-register_multiple_domains("22-123", project, custom_name="domain")
+pdb_domains = "23-123"  # One-based, inclusive displayed residues.
+register_multiple_domains(pdb_domain_string_to_clipping(pdb_domains), project, custom_name="domain")
 create_fold_subset(project, "domain", cutoff=0.8)
 ```
 
-Separate domains with commas, and discontinuous parts of one domain with underscores: `0-50_100-150, 200-300`. Legacy domain widgets/examples may show one-based labels: check the values passed to clipping. Motif and plotting helpers have their own position arguments; inspect the aligned residue and the helper's docstring before defining a signature.
+Separate domains with commas, and discontinuous parts of one domain with underscores. A direct clipping string can be `0-50_100-150, 200-300`. The equivalent PDB string is `1-50_101-150, 201-300`.
 
-The fold selection registers `<view>_FOLD` using an occupancy-weighted coverage score. A cutoff of 0.8 is more restrictive than 0.5. This measures recurring structural coverage in the chosen population.
+`DomNetViewer.domain_string` and its text box use **one-based, inclusive PDB/PUU ranges**. Pass `viewer.clipping_domain_string` to `register_multiple_domains` to preserve the highlighted residues. `pdb_domain_string_to_clipping` and its inverse, `clipping_domain_string_to_pdb`, also support multiple and discontinuous domains. Do not pass the displayed string directly to clipping. Motif and plotting helpers have their own position arguments; inspect the aligned residue and the helper's docstring before defining a signature.
+
+The fold selection registers `<view>_FOLD` using an occupancy-weighted coverage score. A cutoff of 0.8 is more restrictive than 0.5. This measures recurring structural coverage in the chosen population rather than an unweighted percentage of domain residues. The selection does not apply occupancy weights to the coordinate fit or recompute the retained rows' metrics.
 
 ## Plot and explore
 
@@ -57,9 +61,19 @@ project.viz.plot_msa(FULL_VIEW, 0, project.query_length,
                      plot_type="heatmap", data_col="dssp_pileup")
 ```
 
-The structural fingerprint/community API uses **one-based, inclusive** ranges (for example `(1, 150)`), while the clipping API uses zero-based, half-open ranges. Convert a clipped range `(start, end)` to `(start + 1, end)` when calling community detection.
+The structural fingerprint/community API uses **one-based, inclusive** ranges (for example `(1, 150)`), while clipping uses zero-based, half-open ranges. Convert the stored clipping provenance to select exactly the same query residues, including discontinuous domains:
 
-The longer tutorials show domain widgets, sequence signatures, and STRUCTAL/Infomap communities. Expensive community steps are controlled by an execution flag. Try a small population first; record domain ranges, neighbor counts, Infomap arguments, and motif parameters.
+```python
+from daliscope.mechanics.domain_ranges import clipping_ranges_to_pdb
+community_ranges = clipping_ranges_to_pdb(
+    project.provenance["domain"].parameters["domain_ranges"]
+)
+# Use community_ranges as domain_range when calling run_community_detection.
+```
+
+For example, clipping `(22, 123)` converts to community/PDB `(23, 123)`. A literal `(23, 123)` has different meanings in these two APIs.
+
+The longer tutorials show domain widgets, sequence signatures, and STRUCTAL/Infomap communities. The comprehensive `RunDaliScope-1.ipynb` controls expensive optional steps with execution flags; the GOLD worked example executes its full community and recursive analyses. Try a small population first; record domain ranges, neighbor counts, Infomap arguments, and motif parameters.
 
 Drag in the 3D viewer to rotate, scroll to zoom, and use its target controls to change structures. Plotly supports hover labels and zoom. These browser interactions need a manual check beyond headless execution.
 
