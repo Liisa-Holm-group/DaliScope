@@ -6,6 +6,15 @@ DaliScope analyzes an existing [DALI data pack](http://ekhidna2.biocenter.helsin
 
 ![Example DALI hit landscape](docs/images/overview.png)
 
+## Browse HTML example outputs — no code required
+
+Open the saved **HTML example outputs** directly in your browser. No installation or code execution is needed.
+
+- [WorkedExample1 — HTML example output](https://liisa-holm-group.github.io/DaliScope/example-outputs/WorkedExample1.html): multidomain analysis and sequence signatures (originally `SignatureTest.html`).
+- [WorkedExample2 — HTML example output](https://liisa-holm-group.github.io/DaliScope/example-outputs/WorkedExample2.html): GOLD fold communities and structural clustering (originally `WorkedExample-6.html`).
+
+These author-supplied exports preserve saved figures, tables and text. Python-backed controls require running the notebooks below. See the [HTML example-output page](https://liisa-holm-group.github.io/DaliScope/) and [source/provenance record](docs/example-outputs/README.md) for details.
+
 ## Run in your browser with Colab
 
 Start with **[01_quickstart.ipynb in Colab](https://colab.research.google.com/github/Liisa-Holm-group/DaliScope/blob/v0.1.5/notebooks/01_quickstart.ipynb)**. Connect to a CPU runtime, then choose **Runtime → Run all**. The first setup cell downloads the matching DaliScope source and example packs, installs the Colab dependencies, and enables custom widgets. You do not need to install Python locally or choose a local Jupyter kernel.
