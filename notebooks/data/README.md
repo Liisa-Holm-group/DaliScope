@@ -13,7 +13,7 @@ Raw alignments and packed targets differ because multiple alignments can map to 
 
 ## GOLD download
 
-Once the `v0.1.0` GitHub release has been published with its GOLD asset, run from the repository root:
+The GOLD example is distributed with the `v0.1.1` GitHub release. Run from the repository root:
 
 ```bash
 python scripts/download_example.py GOLD

@@ -46,6 +46,7 @@ Open **`notebooks/01_quickstart.ipynb`**, select the **Python (DaliScope)** kern
 - [Preparing your own data](docs/prepare-data.md): a portable pack generator and its database requirements.
 - [Examples and data provenance](notebooks/data/README.md): included datasets and the optional GOLD download.
 - [Validation](docs/validation.md): checks performed and practical limitations.
+- [Release notes](docs/release-notes.md): fixes and analysis changes in version 0.1.1.
 - [Publishing guide](docs/publishing.md): creating the group repository and distributing larger data.
 
 ## Tutorials
