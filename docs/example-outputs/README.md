@@ -26,7 +26,7 @@ The temporary source URLs may expire. These archived copies remain in this repos
 
 Their browser titles and a small header identify them as HTML example outputs and map the original names to the current notebook names. Scientific code, saved outputs, embedded figures and viewer data are otherwise unchanged. Reversing those two presentation changes reproduces the downloaded source bytes exactly.
 
-The exports do not record their execution version, commit or data-pack checksum. They are preserved author-supplied snapshots, not results regenerated with v0.1.5. Links to runnable notebooks use v0.1.5 independently of these snapshots.
+The exports do not record their execution version, commit or data-pack checksum. They are preserved author-supplied snapshots, not results regenerated with v0.1.5 or v0.1.6. Links to runnable notebooks use v0.1.6 independently of these snapshots.
 
 Original download SHA-256:
 

@@ -5,9 +5,9 @@ The public repository is [Liisa-Holm-group/DaliScope](https://github.com/Liisa-H
 ## Prepare a patch release
 
 1. Work on a branch and review the complete diff.
-2. Update `daliscope.__version__`, `CITATION.cff`, the download script's default tag, data instructions, notebook setup tags, Colab links, release notes, and validation record together.
+2. Update `daliscope.__version__`, `CITATION.cff`, the download script's default tag, data instructions, notebook setup tags, current Colab/Pages links, release notes, and validation record together. Preserve version references describing historical tests or archived scientific output. If only the added navigation header in an archived HTML file changes, update its saved checksum in `docs/example-outputs/outputs.json`; keep the original download record unchanged.
 3. Install `.[notebook,packer,dev]`, run `python -m pip check` and `python -m pytest -q`, and execute the affected notebooks in fresh kernels with `scripts/validate_notebooks.py`. GOLD is required for the advanced example.
-4. Build with `python -m build`. Verify that the source distribution includes the reference requirements and three small packs, and that neither package includes GOLD or local files.
+4. Build with `python -m build` from the final clean checkout. For the clean source ZIP, export tracked files with `scripts/export_release.py` to an empty directory outside the repository; new helpers must already be tracked. Verify that the source distribution includes the reference requirements and three small packs, and that neither package includes GOLD or local files.
 5. Merge only after the Windows and Ubuntu GitHub Actions checks pass. Create the release from the tested commit, with its corresponding version tag.
 
 The software license is MIT, copyright Liisa Holm group. Contact: `hao.liu@helsinki.fi`. A manuscript describing DaliScope is being prepared for submission; update this status after submission and add the paper citation when available.
@@ -21,9 +21,11 @@ Use the Release attachment basenames in `checksums.json`, with `bytes` and `sha2
 For example, with a validated tag and authenticated GitHub CLI:
 
 ```bash
-gh release create v0.1.5 --repo Liisa-Holm-group/DaliScope --verify-tag --title "DaliScope 0.1.5" --notes-file docs/release-notes.md
-gh release upload v0.1.5 /path/to/assets/GOLD.tar.gz /path/to/assets/daliscope-0.1.5-py3-none-any.whl /path/to/assets/daliscope-0.1.5.tar.gz /path/to/assets/DaliScope-0.1.5-source.zip /path/to/assets/checksums.json --repo Liisa-Holm-group/DaliScope
+gh release create v0.1.6 --repo Liisa-Holm-group/DaliScope --verify-tag --draft --title "DaliScope 0.1.6" --notes-file docs/release-notes.md
+gh release upload v0.1.6 /path/to/assets/GOLD.tar.gz /path/to/assets/daliscope-0.1.6-py3-none-any.whl /path/to/assets/daliscope-0.1.6.tar.gz /path/to/assets/DaliScope-0.1.6-source.zip /path/to/assets/checksums.json --repo Liisa-Holm-group/DaliScope
 ```
+
+Verify the draft attachments against `checksums.json`, then publish with `gh release edit v0.1.6 --draft=false --repo Liisa-Holm-group/DaliScope` and check their public downloads.
 
 Once the release exists, `python scripts/download_example.py GOLD` downloads and verifies the optional pack. For earlier versions, pass the corresponding tag explicitly, such as `--tag v0.1.0`.
 

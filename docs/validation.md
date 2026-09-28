@@ -1,5 +1,17 @@
 # Validation record
 
+## 0.1.6 URL data-pack input
+
+`RunDaliScope.ipynb` now accepts a direct HTTP/HTTPS data-pack download URL or a local path in its native Colab `pack_source` field. URL downloads are streamed to a temporary file, checked for a complete gzip-tar archive and the seven required regular input files, then published under a SHA-256 cache filename. The helper does not extract archive members to the filesystem. Failed downloads stop without loading the bundled example or replacing a valid cached input. The printed checksum records downloaded bytes rather than verification against a separate upstream checksum.
+
+The final Windows suite passed **63 tests** in **38.70 seconds**, with the same 13 existing Infomap/ipympl/traitlets warnings. Fourteen new checks cover local path compatibility, HTTP query strings, HTTPS URL handling, complete and malformed gzip streams, HTML/404 responses, missing members, interrupted downloads, preservation of cached files, absence of filesystem extraction, and the notebook input cell's use of a supplied URL. Dependency checking passed.
+
+On **28 September 2026**, the DALI server generated a fresh pack for JOBID **CNRC3YTJrfM**. Its archive was downloaded through the new URL input and the complete comprehensive notebook ran in a fresh **Windows reference kernel**: **29 non-empty code cells** passed in **39.52 seconds**, with query **3ubpC**, query length **570**, and **1,048 targets**. The only validation override was setting `pack_source` to the server's generated download URL. The input SHA-256 was `075cd1a35da92514517b810954b860e92119efd5430caa6303d9a0b9289efc9f`. The generated pack's page stated a one-hour lifetime, independently of the original search results' one-week lifetime.
+
+All four notebook schemas passed. After normalizing version references, quickstart and WorkedExample1/2 match 0.1.5 exactly; RunDaliScope changes only its input instructions and input cell. Scientific analysis cells, default parameters, cell IDs and metadata are preserved, and source notebooks contain no executed outputs. The archived example HTML scientific content also remains byte-for-byte reproducible from the supplied exports after reversing the added browser title/header; only current notebook navigation links changed for 0.1.6.
+
+This is a local computational test of the URL path, not a new hosted Colab frontend test. The fixed GitHub/Colab launch URL opens the notebook; users paste the generated archive URL before running cells. Arbitrary URL query parameters are not consumed. The DALI CGI maintainer must apply the documented button URL to the hosted template. Earlier hosted widget evidence and remaining frontend limitations below remain historical.
+
 ## 0.1.5 bundled Pfam descriptions
 
 The local packer now defaults to the installed `daliscope/packer/data/pfam_names.tsv` instead of requiring a descriptions table outside the repository. The explicit `--pfam-names` option remains available. The README links to the official self-contained DALI data-pack service and clarifies that analysis reads Pfam data from the pack itself.

@@ -17,16 +17,20 @@ These author-supplied exports preserve saved figures, tables and text. Python-ba
 
 ## Run in your browser with Colab
 
-Start with **[01_quickstart.ipynb in Colab](https://colab.research.google.com/github/Liisa-Holm-group/DaliScope/blob/v0.1.5/notebooks/01_quickstart.ipynb)**. Connect to a CPU runtime, then choose **Runtime → Run all**. The first setup cell downloads the matching DaliScope source and example packs, installs the Colab dependencies, and enables custom widgets. You do not need to install Python locally or choose a local Jupyter kernel.
+Start with **[01_quickstart.ipynb in Colab](https://colab.research.google.com/github/Liisa-Holm-group/DaliScope/blob/v0.1.6/notebooks/01_quickstart.ipynb)**. Connect to a CPU runtime, then choose **Runtime → Run all**. The first setup cell downloads the matching DaliScope source and example packs, installs the Colab dependencies, and enables custom widgets. You do not need to install Python locally or choose a local Jupyter kernel.
 
 | Notebook | Purpose | Colab |
 | --- | --- | --- |
-| `01_quickstart.ipynb` | Short introduction; included 3ubpC pack | [Open in Colab](https://colab.research.google.com/github/Liisa-Holm-group/DaliScope/blob/v0.1.5/notebooks/01_quickstart.ipynb) |
-| `RunDaliScope.ipynb` | Comprehensive domain and motif workflow; included 3ubpC pack | [Open in Colab](https://colab.research.google.com/github/Liisa-Holm-group/DaliScope/blob/v0.1.5/notebooks/RunDaliScope.ipynb) |
-| `WorkedExample1.ipynb` | Multidomain and sequence-signature case study; included ZN pack | [Open in Colab](https://colab.research.google.com/github/Liisa-Holm-group/DaliScope/blob/v0.1.5/notebooks/WorkedExample1.ipynb) |
-| `WorkedExample2.ipynb` | GOLD fold communities; automatically downloads the optional GOLD pack in Colab | [Open in Colab](https://colab.research.google.com/github/Liisa-Holm-group/DaliScope/blob/v0.1.5/notebooks/WorkedExample2.ipynb) |
+| `01_quickstart.ipynb` | Short introduction; included 3ubpC pack | [Open in Colab](https://colab.research.google.com/github/Liisa-Holm-group/DaliScope/blob/v0.1.6/notebooks/01_quickstart.ipynb) |
+| `RunDaliScope.ipynb` | Comprehensive domain and motif workflow; included 3ubpC pack | [Open in Colab](https://colab.research.google.com/github/Liisa-Holm-group/DaliScope/blob/v0.1.6/notebooks/RunDaliScope.ipynb) |
+| `WorkedExample1.ipynb` | Multidomain and sequence-signature case study; included ZN pack | [Open in Colab](https://colab.research.google.com/github/Liisa-Holm-group/DaliScope/blob/v0.1.6/notebooks/WorkedExample1.ipynb) |
+| `WorkedExample2.ipynb` | GOLD fold communities; automatically downloads the optional GOLD pack in Colab | [Open in Colab](https://colab.research.google.com/github/Liisa-Holm-group/DaliScope/blob/v0.1.6/notebooks/WorkedExample2.ipynb) |
 
-These links use **v0.1.5** so notebook code and installed source match. After the default example finishes, explore its display controls. To change analysis inputs or domain/filter/motif choices, reload the project and execute subsequent sections in order, applying the new choices before registering views; existing view names are retained on rerun. The comprehensive notebook leaves its expensive community step off by default; GOLD runs community analysis. Case-study choices and biological interpretations apply to their frozen input datasets.
+To analyze your own DALI data pack, open **[RunDaliScope in Colab](https://colab.research.google.com/github/Liisa-Holm-group/DaliScope/blob/v0.1.6/notebooks/RunDaliScope.ipynb)** and paste its direct download URL into the **`pack_source`** field before choosing **Runtime → Run all**. You can also use a local runtime path. Copy the archive download link, rather than the DALI results-page URL, and keep a permanent copy of the input pack. See [your own pack and the server launch link](docs/colab.md#use-your-own-dali-data-pack) for the steps.
+
+These links use **v0.1.6** so notebook code and installed source match. After the default example finishes, explore its display controls. To change analysis inputs or domain/filter/motif choices, reload the project and execute subsequent sections in order, applying the new choices before registering views; existing view names are retained on rerun. The comprehensive notebook leaves its expensive community step off by default; GOLD runs community analysis. Case-study choices and biological interpretations apply to their frozen input datasets.
+
+Version 0.1.6 adds a direct data-pack URL or local-path input to `RunDaliScope.ipynb` and documents the standard Colab launch link for the DALI server. Scientific algorithms, default analysis parameters, and frozen example packs are unchanged from 0.1.5. The HTML examples above remain preserved author-supplied snapshots.
 
 Version 0.1.5 includes the complete Pfam descriptions reference for local pack generation and clarifies that DALI data packs are self-contained. Tutorial computations and example datasets are unchanged from 0.1.4; the standardized notebook names remain `RunDaliScope.ipynb`, `WorkedExample1.ipynb`, and `WorkedExample2.ipynb`.
 
@@ -39,7 +43,7 @@ See the [Colab guide](docs/colab.md) for runtime setup, browser interaction, and
 Use **Python 3.12** for the reference environment. Check `python --version` before creating the environment; the commands below assume it reports 3.12. If your default Python is 3.13, install/select Python 3.12 and use its executable for the venv command, or use the independent Conda alternative below. The package declares Python 3.10 or newer; tested platform/version coverage is recorded in [validation](docs/validation.md).
 
 ```bash
-git clone --branch v0.1.5 https://github.com/Liisa-Holm-group/DaliScope.git
+git clone --branch v0.1.6 https://github.com/Liisa-Holm-group/DaliScope.git
 cd DaliScope
 python -m venv .venv
 ```

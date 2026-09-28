@@ -1,5 +1,6 @@
 include README.md LICENSE CITATION.cff
-recursive-include docs *.md *.png
+recursive-include docs *.md *.png *.html *.json
+include docs/.nojekyll
 include docs/requirements-windows-py312.txt
 recursive-include tests *.py
 recursive-include scripts *.py
