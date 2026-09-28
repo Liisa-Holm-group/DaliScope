@@ -17,6 +17,8 @@ htmlcov/
 .local-archive/
 results/
 *.log
+# User data packs downloaded by the comprehensive notebook
+notebooks/data/downloaded/
 # Optional full case-study dataset (distributed with releases)
 notebooks/data/GOLD.tar.gz
 # Editor and operating-system files

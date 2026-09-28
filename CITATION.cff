@@ -2,7 +2,7 @@ cff-version: 1.2.0
 message: "Please cite this software and the DALI/data sources used in your analysis."
 title: DaliScope
 type: software
-version: 0.1.5
+version: 0.1.6
 authors:
   - name: Liisa Holm group
     email: hao.liu@helsinki.fi
