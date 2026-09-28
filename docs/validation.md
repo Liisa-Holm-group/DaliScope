@@ -1,5 +1,15 @@
 # Validation record
 
+## 0.1.4 notebook naming update
+
+The current tutorials are `RunDaliScope.ipynb`, `WorkedExample1.ipynb`, and `WorkedExample2.ipynb`; `01_quickstart.ipynb` retains its name. README and notebook references, Colab links/setup tags, test paths, and release downloads use the same 0.1.4 version.
+
+All four notebook schemas were validated and their parsed contents compared with the 0.1.3 originals. The only notebook changes are the requested filenames/display metadata and filename/version references; computational code, analysis parameters, cell IDs, and frozen inputs are preserved. Source notebooks contain no executed outputs. The Windows Colab-setup and figure-lifecycle tests passed **14 tests**, with 11 existing upstream warnings, using the renamed comprehensive notebook. GitHub Actions executes the quickstart, `RunDaliScope.ipynb`, and `WorkedExample1.ipynb` using their new paths.
+
+The full Windows/Linux and hosted results below were recorded on 0.1.3, when the tutorials had their original filenames. They are historical computational/frontend evidence. This naming patch does not claim new hosted-Colab mouse checks or a repeated complete GOLD computation. Earlier release tags and their notebook names remain available.
+
+## 0.1.3 validation history
+
 Status on **28 September 2026** for DaliScope **0.1.3**, source commit [e8cc5cd](https://github.com/Liisa-Holm-group/DaliScope/commit/e8cc5cdb996fc5d3a03e57e45dc236e180461cc5). Completed checks and checks awaiting final results are listed separately.
 
 ## Completed checks

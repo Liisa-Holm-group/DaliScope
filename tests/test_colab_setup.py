@@ -63,7 +63,7 @@ def test_comprehensive_notebook_preserves_colab_renderer():
     import json
     import plotly.io as pio
 
-    notebook = json.loads((ROOT / "notebooks/RunDaliScope-1.ipynb").read_text(encoding="utf-8"))
+    notebook = json.loads((ROOT / "notebooks/RunDaliScope.ipynb").read_text(encoding="utf-8"))
     sources = ["".join(cell["source"]) for cell in notebook["cells"]
                if cell["cell_type"] == "code" and "pio.renderers.default" in "".join(cell["source"])]
     previous = pio.renderers.default

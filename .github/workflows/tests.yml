@@ -43,4 +43,4 @@ jobs:
       - run: python -m pip install -e ".[colab,packer,dev]" "ipython==7.34.0" "ipykernel==6.17.1" "pandas==2.2.3" "numpy==2.0.2"
       - run: python -m pip check
       - run: python -m pytest -q
-      - run: python scripts/validate_notebooks.py notebooks/01_quickstart.ipynb notebooks/RunDaliScope-1.ipynb notebooks/SignatureTest.ipynb
+      - run: python scripts/validate_notebooks.py notebooks/01_quickstart.ipynb notebooks/RunDaliScope.ipynb notebooks/WorkedExample1.ipynb
