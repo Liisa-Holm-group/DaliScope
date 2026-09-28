@@ -106,7 +106,7 @@ def test_failed_render_cleans_only_new_figures_and_restores_interactive_mode(plo
 
 
 def test_profile_cell_preserves_prior_canvas_and_cleans_its_new_figures(plot_runtime):
-    notebook = json.loads((ROOT / "notebooks/RunDaliScope-1.ipynb").read_text(encoding="utf-8"))
+    notebook = json.loads((ROOT / "notebooks/RunDaliScope.ipynb").read_text(encoding="utf-8"))
     source = next("".join(cell["source"]) for cell in notebook["cells"]
                   if "derive_signature_profile(" in "".join(cell.get("source", [])))
     start = source.index("    nr_threshold =")

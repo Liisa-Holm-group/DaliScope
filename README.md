@@ -8,16 +8,18 @@ DaliScope analyzes an existing DALI data pack. Running a DALI search and provisi
 
 ## Run in your browser with Colab
 
-Start with **[01_quickstart.ipynb in Colab](https://colab.research.google.com/github/Liisa-Holm-group/DaliScope/blob/v0.1.3/notebooks/01_quickstart.ipynb)**. Connect to a CPU runtime, then choose **Runtime → Run all**. The first setup cell downloads the matching DaliScope source and example packs, installs the Colab dependencies, and enables custom widgets. You do not need to install Python locally or choose a local Jupyter kernel.
+Start with **[01_quickstart.ipynb in Colab](https://colab.research.google.com/github/Liisa-Holm-group/DaliScope/blob/v0.1.4/notebooks/01_quickstart.ipynb)**. Connect to a CPU runtime, then choose **Runtime → Run all**. The first setup cell downloads the matching DaliScope source and example packs, installs the Colab dependencies, and enables custom widgets. You do not need to install Python locally or choose a local Jupyter kernel.
 
 | Notebook | Purpose | Colab |
 | --- | --- | --- |
-| `01_quickstart.ipynb` | Short introduction; included 3ubpC pack | [Open in Colab](https://colab.research.google.com/github/Liisa-Holm-group/DaliScope/blob/v0.1.3/notebooks/01_quickstart.ipynb) |
-| `RunDaliScope-1.ipynb` | Comprehensive domain and motif workflow; included 3ubpC pack | [Open in Colab](https://colab.research.google.com/github/Liisa-Holm-group/DaliScope/blob/v0.1.3/notebooks/RunDaliScope-1.ipynb) |
-| `SignatureTest.ipynb` | Multidomain and sequence-signature case study; included ZN pack | [Open in Colab](https://colab.research.google.com/github/Liisa-Holm-group/DaliScope/blob/v0.1.3/notebooks/SignatureTest.ipynb) |
-| `WorkedExample-6.ipynb` | GOLD fold communities; automatically downloads the optional GOLD pack in Colab | [Open in Colab](https://colab.research.google.com/github/Liisa-Holm-group/DaliScope/blob/v0.1.3/notebooks/WorkedExample-6.ipynb) |
+| `01_quickstart.ipynb` | Short introduction; included 3ubpC pack | [Open in Colab](https://colab.research.google.com/github/Liisa-Holm-group/DaliScope/blob/v0.1.4/notebooks/01_quickstart.ipynb) |
+| `RunDaliScope.ipynb` | Comprehensive domain and motif workflow; included 3ubpC pack | [Open in Colab](https://colab.research.google.com/github/Liisa-Holm-group/DaliScope/blob/v0.1.4/notebooks/RunDaliScope.ipynb) |
+| `WorkedExample1.ipynb` | Multidomain and sequence-signature case study; included ZN pack | [Open in Colab](https://colab.research.google.com/github/Liisa-Holm-group/DaliScope/blob/v0.1.4/notebooks/WorkedExample1.ipynb) |
+| `WorkedExample2.ipynb` | GOLD fold communities; automatically downloads the optional GOLD pack in Colab | [Open in Colab](https://colab.research.google.com/github/Liisa-Holm-group/DaliScope/blob/v0.1.4/notebooks/WorkedExample2.ipynb) |
 
-These links use **v0.1.3** so notebook code and installed source match. After the default example finishes, explore its display controls. To change analysis inputs or domain/filter/motif choices, reload the project and execute subsequent sections in order, applying the new choices before registering views; existing view names are retained on rerun. The comprehensive notebook leaves its expensive community step off by default; GOLD runs community analysis. Case-study choices and biological interpretations apply to their frozen input datasets.
+These links use **v0.1.4** so notebook code and installed source match. After the default example finishes, explore its display controls. To change analysis inputs or domain/filter/motif choices, reload the project and execute subsequent sections in order, applying the new choices before registering views; existing view names are retained on rerun. The comprehensive notebook leaves its expensive community step off by default; GOLD runs community analysis. Case-study choices and biological interpretations apply to their frozen input datasets.
+
+Version 0.1.4 renames the tutorials to `RunDaliScope.ipynb`, `WorkedExample1.ipynb`, and `WorkedExample2.ipynb`, with matching Colab links and release downloads. Tutorial computations and datasets are unchanged from 0.1.3.
 
 Version 0.1.3 refreshes Matplotlib backend discovery after live installation and preserves existing widget figures while later display/profile plots are drawn. Its notebooks use standard Python 3 kernel metadata for Colab. The scientific algorithms and example data are unchanged from 0.1.2.
 
@@ -28,7 +30,7 @@ See the [Colab guide](docs/colab.md) for runtime setup, browser interaction, and
 Use **Python 3.12** for the reference environment. Check `python --version` before creating the environment; the commands below assume it reports 3.12. If your default Python is 3.13, install/select Python 3.12 and use its executable for the venv command, or use the independent Conda alternative below. The package declares Python 3.10 or newer; tested platform/version coverage is recorded in [validation](docs/validation.md).
 
 ```bash
-git clone --branch v0.1.3 https://github.com/Liisa-Holm-group/DaliScope.git
+git clone --branch v0.1.4 https://github.com/Liisa-Holm-group/DaliScope.git
 cd DaliScope
 python -m venv .venv
 ```
@@ -83,9 +85,9 @@ conda run --no-capture-output -n daliscope python -m jupyterlab
 | Notebook | Purpose | Input |
 | --- | --- | --- |
 | `01_quickstart.ipynb` | Short introduction with static and interactive output | Included 3ubpC pack |
-| `RunDaliScope-1.ipynb` | Comprehensive workflow with user-controlled domain and motif steps | Included 3ubpC pack |
-| `SignatureTest.ipynb` | Multidomain analysis and sequence signatures | Included ZN pack |
-| `WorkedExample-6.ipynb` | GOLD-like fold communities and STRUCTAL/Infomap analysis | Optional GOLD pack |
+| `RunDaliScope.ipynb` | Comprehensive workflow with user-controlled domain and motif steps | Included 3ubpC pack |
+| `WorkedExample1.ipynb` | Multidomain analysis and sequence signatures | Included ZN pack |
+| `WorkedExample2.ipynb` | GOLD-like fold communities and STRUCTAL/Infomap analysis | Optional GOLD pack |
 
 The comprehensive workflow contains interactive and optional steps. Execute it section by section, adjusting the parameters for your query. Case-study parameters and biological interpretations apply to their frozen input datasets.
 

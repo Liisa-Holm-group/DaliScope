@@ -73,7 +73,7 @@ community_ranges = clipping_ranges_to_pdb(
 
 For example, clipping `(22, 123)` converts to community/PDB `(23, 123)`. A literal `(23, 123)` has different meanings in these two APIs.
 
-The longer tutorials show domain widgets, sequence signatures, and STRUCTAL/Infomap communities. The comprehensive `RunDaliScope-1.ipynb` controls expensive optional steps with execution flags; the GOLD worked example executes its full community and recursive analyses. Try a small population first; record domain ranges, neighbor counts, Infomap arguments, and motif parameters.
+The longer tutorials show domain widgets, sequence signatures, and STRUCTAL/Infomap communities. The comprehensive `RunDaliScope.ipynb` controls expensive optional steps with execution flags; the GOLD worked example executes its full community and recursive analyses. Try a small population first; record domain ranges, neighbor counts, Infomap arguments, and motif parameters.
 
 Drag in the 3D viewer to rotate, scroll to zoom, and use its target controls to change structures. Plotly supports hover labels and zoom. These browser interactions need a manual check beyond headless execution.
 
