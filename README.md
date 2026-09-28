@@ -2,7 +2,7 @@
 
 DaliScope is a notebook-based toolkit for exploring DALI structural search results. It combines domain-level filtering, Pfam annotation, sequence and secondary-structure profiles, interactive 3D views, motif analysis, and structural community detection.
 
-DaliScope analyzes an existing DALI data pack. Running a DALI search and provisioning the protein/Pfam databases are separate steps.
+DaliScope analyzes an existing [DALI data pack](http://ekhidna2.biocenter.helsinki.fi/dali/colab.html), which is self-contained and includes Pfam data.
 
 ![Example DALI hit landscape](docs/images/overview.png)
 
