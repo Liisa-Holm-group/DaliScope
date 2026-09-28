@@ -1,6 +1,7 @@
 """Create a DaliScope data pack using explicitly configured local databases."""
 
 import argparse
+import csv
 import os
 from pathlib import Path
 import subprocess
@@ -86,6 +87,22 @@ def main(argv=None):
         missing = [name for name in required if not (work / name).is_file()]
         if missing:
             raise FileNotFoundError(f"pack generation did not produce: {', '.join(missing)}")
+
+        # Validate the query before publishing or replacing an existing pack.
+        from daliscope.mechanics.geometry import _parse_query_ca_coords
+        try:
+            query_coords = _parse_query_ca_coords(
+                (work / "Query.pdb").read_text(encoding="utf-8")
+            )
+            with (work / "query_meta.tsv").open(encoding="utf-8", newline="") as handle:
+                query_length = int(next(csv.DictReader(handle, delimiter="\t"))["length"])
+        except (ValueError, IndexError, KeyError, StopIteration) as error:
+            parser.error(f"invalid Query.pdb or query_meta.tsv: {error}")
+        if len(query_coords) != query_length:
+            parser.error(
+                f"Query.pdb has {len(query_coords)} C-alpha atoms but "
+                f"query_meta.tsv length is {query_length}; check the query chain and metadata"
+            )
         archive = work / "result.tar.gz"
         with tarfile.open(archive, "w:gz") as tar:
             for name in required:
