@@ -92,17 +92,21 @@ The earlier published v0.1.2 quickstart completed its eight original code cells 
 
 ## Server launcher configuration
 
-For the DALI server's Launch Colab button, set `YOUR_COLAB_URL` to this fixed notebook URL:
+For the DALI server's Launch Colab button, set `YOUR_COLAB_URL` to this permanent notebook URL:
 
 ```text
-YOUR_COLAB_URL = "https://colab.research.google.com/github/Liisa-Holm-group/DaliScope/blob/v0.1.7/notebooks/RunDaliScope.ipynb"
+YOUR_COLAB_URL = "https://colab.research.google.com/github/Liisa-Holm-group/DaliScope/blob/latest/notebooks/RunDaliScope.ipynb"
 ```
 
 The CGI can render the following HTML. Replace `ACTUAL_PACK_DOWNLOAD_URL` with the generated archive URL in the server template:
 
 ```html
-<a href="https://colab.research.google.com/github/Liisa-Holm-group/DaliScope/blob/v0.1.7/notebooks/RunDaliScope.ipynb" target="_blank" rel="noopener">Launch DaliScope in Colab</a>
+<a href="https://colab.research.google.com/github/Liisa-Holm-group/DaliScope/blob/latest/notebooks/RunDaliScope.ipynb" target="_blank" rel="noopener">Launch DaliScope in Colab</a>
 <p>Copy the <a href="ACTUAL_PACK_DOWNLOAD_URL">DALI data-pack download URL</a> into the notebook's <code>pack_source</code> field, connect to a CPU runtime, and choose Runtime &rarr; Run all.</p>
 ```
 
 The GitHub/Colab link opens the notebook; users then paste the pack download URL into its native field. Server maintainers must apply this replacement to the hosted CGI template. Changes to this repository do not deploy that server template.
+
+The `latest` branch is advanced by the DaliScope release maintainer only after a formal release is published and its public downloads and entry points have been verified. Each notebook keeps its explicit release tag internally, so its installed source and release data match the opened notebook. The DALI server maintainer applies the permanent button URL once; subsequent DaliScope releases do not require another CGI link change. See the [publishing procedure](publishing.md#update-the-permanent-colab-entry).
+
+For reproducible analyses, use a versioned notebook link, such as [RunDaliScope v0.1.7](https://colab.research.google.com/github/Liisa-Holm-group/DaliScope/blob/v0.1.7/notebooks/RunDaliScope.ipynb), and record the package version and input checksum. A saved notebook copy and an existing runtime do not update automatically when `latest` advances; reopen the permanent link in a fresh runtime to use a new release.
