@@ -1,5 +1,13 @@
 # Release notes
 
+## DaliScope 0.1.7
+
+The plane-bisector selector embeds its existing ipympl canvas in an ipywidgets container, bypassing the initial direct-display PNG preview involved in the reported `AttributeError: 'NoneType' object has no attribute 'dpi'`. The live canvas, controls and event callbacks are retained, with the existing display fallback for non-widget backends. Interactive output requires a working widget frontend; the direct static PNG preview is no longer emitted.
+
+`RunDaliScope.ipynb` explains the actual Z-score/query-coverage axes, selected side and visible crop bounds. An empty bisector selection now gives instructions for adjusting the existing controls and rerunning the harvest cell, without registering an empty view. The Section 1 heading typo is corrected.
+
+Scientific selection calculations, default analysis parameters and frozen input packs are unchanged from 0.1.6. Current notebook links, source setup and release downloads use 0.1.7. Earlier tags, assets and author-supplied HTML scientific outputs remain available. See the [validation record](https://github.com/Liisa-Holm-group/DaliScope/blob/v0.1.7/docs/validation.md) for exact tested source and frontend limits.
+
 ## DaliScope 0.1.6
 
 `RunDaliScope.ipynb` accepts a direct HTTP/HTTPS DALI data-pack download URL or a local file path through its native Colab `pack_source` field. The default remains the bundled 3ubpC example. Users can open the standard versioned Colab link, paste their generated pack's download URL, connect to a CPU runtime, and run the notebook.

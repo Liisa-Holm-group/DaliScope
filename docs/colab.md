@@ -4,11 +4,11 @@
 
 Open one of the versioned links in the [README](../README.md#run-in-your-browser-with-colab), connect to a runtime, and select **Runtime → Run all**. A standard **CPU** runtime is sufficient for the tutorial code; GPU acceleration is not used by these workflows.
 
-The first code cell handles Colab setup. It obtains **DaliScope v0.1.6** in `/content/DaliScope`, installs the package with `.[colab]` in the runtime's Python environment, and enables Google's custom widget manager. After live installation it refreshes Matplotlib's cached backend discovery so the running kernel can request the newly installed widget backend. Installing Colab dependencies is done once per runtime. A GitHub notebook link supplies only the notebook, so the source clone and data files are still necessary; the setup cell provides them automatically.
+The first code cell handles Colab setup. It obtains **DaliScope v0.1.7** in `/content/DaliScope`, installs the package with `.[colab]` in the runtime's Python environment, and enables Google's custom widget manager. After live installation it refreshes Matplotlib's cached backend discovery so the running kernel can request the newly installed widget backend. Installing Colab dependencies is done once per runtime. A GitHub notebook link supplies only the notebook, so the source clone and data files are still necessary; the setup cell provides them automatically.
 
 Use the Colab runtime's kernel. Local venv creation, Conda commands, ipykernel registration, and the local **Python (DaliScope)** kernel selection are not part of this procedure. In a local Jupyter session, the first Colab setup cell is a no-op and the README's local installation applies.
 
-The v0.1.6 notebooks use generic **Python 3** kernel metadata to avoid Colab's unrecognized local-runtime notice. This does not select your local environment: when using local Jupyter, still choose the registered **Python (DaliScope)** kernel described in the README.
+The v0.1.7 notebooks use generic **Python 3** kernel metadata to avoid Colab's unrecognized local-runtime notice. This does not select your local environment: when using local Jupyter, still choose the registered **Python (DaliScope)** kernel described in the README.
 
 Start with `01_quickstart.ipynb`. It should report query `3ubpC`, length **570**, and **1,048** rows in the default view, then show plots, a structure viewer, and a session save/restore confirmation. Longer examples run their default analysis choices first. After completion, explore the display controls. For revised data, domains, filters, or motifs, start again from the cell that loads a fresh `Project`, then execute the following sections in order and apply your new control choices before registering views. Reusing an existing view name does not replace its earlier analysis; use a fresh project or a new unique view name.
 
@@ -19,13 +19,13 @@ The cloned repository includes the 3ubpC, dotp, and ZN example packs. Quickstart
 `WorkedExample2.ipynb` uses the optional **GOLD** pack, approximately 50 MiB. In Colab it downloads the release asset when absent and verifies its SHA-256 against `notebooks/data/datasets.json` before analysis. To download or verify it manually in a Colab code cell:
 
 ```python
-!python /content/DaliScope/scripts/download_example.py GOLD --tag v0.1.6
+!python /content/DaliScope/scripts/download_example.py GOLD --tag v0.1.7
 ```
 
 ## Use your own DALI data pack
 
 1. Generate a self-contained pack using the [DALI data-pack service](http://ekhidna2.biocenter.helsinki.fi/dali/colab.html). On the generated page, copy the actual archive download URL. Use the pack link, not the DALI search-results HTML page or the page containing the download button.
-2. Open [RunDaliScope v0.1.6 in Colab](https://colab.research.google.com/github/Liisa-Holm-group/DaliScope/blob/v0.1.6/notebooks/RunDaliScope.ipynb). Before executing the analysis, paste the download URL into its **`pack_source`** string field. HTTP and HTTPS download URLs are supported. The default field value loads the bundled example instead.
+2. Open [RunDaliScope v0.1.7 in Colab](https://colab.research.google.com/github/Liisa-Holm-group/DaliScope/blob/v0.1.7/notebooks/RunDaliScope.ipynb). Before executing the analysis, paste the download URL into its **`pack_source`** string field. HTTP and HTTPS download URLs are supported. The default field value loads the bundled example instead.
 3. Connect to a standard CPU runtime and select **Runtime → Run all**. The loading cell downloads the archive, checks its complete gzip-tar stream and required pack files, and prints the cached path and SHA-256 before loading the project. Record that checksum with your analysis.
 
 For an uploaded pack, use Colab's Files panel and enter its absolute path in `pack_source`, such as `/content/my-query.tar.gz`. In local Jupyter, edit the same `pack_source` string in the code cell to a local path or URL. The archive must follow the [data-pack contract](data-format.md); a lone PDB is not a DaliScope input pack.
@@ -84,7 +84,7 @@ Download outputs before deleting or losing the runtime. Saving the notebook to D
 
 ## Source version and validation limits
 
-The v0.1.6 Colab links, setup source checkout, and GOLD release selection use the same version. This patch adds the direct URL/local-path `pack_source` input to the comprehensive notebook. Scientific algorithms, default analysis parameters, and frozen example data are unchanged from 0.1.5. Keep the software version fixed when recording an analysis. Record the data checksum, domains, filters, and clustering/motif parameters alongside outputs; selecting a different pack or changing those choices can change results. The [validation record](validation.md) separates the current patch checks from earlier hosted frontend evidence.
+The v0.1.7 Colab links, setup source checkout, and GOLD release selection use the same version. This patch fixes the initial bisector plot preview and explains empty selections; the existing URL/local-path `pack_source` input remains available. Scientific algorithms, default analysis parameters, and frozen example data are unchanged from 0.1.6. Keep the software version fixed when recording an analysis. Record the data checksum, domains, filters, and clustering/motif parameters alongside outputs; selecting a different pack or changing those choices can change results. The [validation record](validation.md) separates current checks from earlier hosted frontend evidence.
 
 The 0.1.3 comprehensive workflow completed all 29 non-empty tutorial code cells in a fresh hosted Colab runtime on 28 September 2026. Setup installed the dependencies and refreshed backend discovery automatically. After the final analysis, switching the existing hit-plane widget to `dom_1` visibly updated the axes and plotted points. This pre-release check used the public source commit, with only the initial clone adapted to its branch because the release tag was not yet available; see [validation](validation.md) for exact provenance.
 
@@ -95,13 +95,13 @@ The earlier published v0.1.2 quickstart completed its eight original code cells 
 For the DALI server's Launch Colab button, set `YOUR_COLAB_URL` to this fixed notebook URL:
 
 ```text
-YOUR_COLAB_URL = "https://colab.research.google.com/github/Liisa-Holm-group/DaliScope/blob/v0.1.6/notebooks/RunDaliScope.ipynb"
+YOUR_COLAB_URL = "https://colab.research.google.com/github/Liisa-Holm-group/DaliScope/blob/v0.1.7/notebooks/RunDaliScope.ipynb"
 ```
 
 The CGI can render the following HTML. Replace `ACTUAL_PACK_DOWNLOAD_URL` with the generated archive URL in the server template:
 
 ```html
-<a href="https://colab.research.google.com/github/Liisa-Holm-group/DaliScope/blob/v0.1.6/notebooks/RunDaliScope.ipynb" target="_blank" rel="noopener">Launch DaliScope in Colab</a>
+<a href="https://colab.research.google.com/github/Liisa-Holm-group/DaliScope/blob/v0.1.7/notebooks/RunDaliScope.ipynb" target="_blank" rel="noopener">Launch DaliScope in Colab</a>
 <p>Copy the <a href="ACTUAL_PACK_DOWNLOAD_URL">DALI data-pack download URL</a> into the notebook's <code>pack_source</code> field, connect to a CPU runtime, and choose Runtime &rarr; Run all.</p>
 ```
 

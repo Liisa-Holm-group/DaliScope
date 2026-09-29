@@ -26,7 +26,7 @@ The temporary source URLs may expire. These archived copies remain in this repos
 
 Their browser titles and a small header identify them as HTML example outputs and map the original names to the current notebook names. Scientific code, saved outputs, embedded figures and viewer data are otherwise unchanged. Reversing those two presentation changes reproduces the downloaded source bytes exactly.
 
-The exports do not record their execution version, commit or data-pack checksum. They are preserved author-supplied snapshots, not results regenerated with v0.1.5 or v0.1.6. Links to runnable notebooks use v0.1.6 independently of these snapshots.
+The exports do not record their execution version, commit or data-pack checksum. They are preserved author-supplied snapshots, not results regenerated with current releases. Links to runnable notebooks use v0.1.7 independently of these snapshots.
 
 Original download SHA-256:
 
@@ -37,4 +37,4 @@ Original download SHA-256:
 
 ## Site publishing
 
-GitHub Pages serves the `main` branch's `/docs` directory. `docs/.nojekyll` keeps the exported HTML as static files. Updating this documentation does not change the v0.1.5 release tag or its downloadable assets.
+GitHub Pages serves the `main` branch's `/docs` directory. `docs/.nojekyll` keeps the exported HTML as static files. Earlier release tags and downloadable assets retain their original contents.
