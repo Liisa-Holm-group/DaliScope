@@ -1,4 +1,6 @@
-# DaliScope 0.1.6
+# Release notes
+
+## DaliScope 0.1.6
 
 `RunDaliScope.ipynb` accepts a direct HTTP/HTTPS DALI data-pack download URL or a local file path through its native Colab `pack_source` field. The default remains the bundled 3ubpC example. Users can open the standard versioned Colab link, paste their generated pack's download URL, connect to a CPU runtime, and run the notebook.
 
@@ -9,3 +11,11 @@ The Colab guide supplies the canonical v0.1.6 `YOUR_COLAB_URL` and an HTML launc
 Two author-supplied worked-example HTML exports are archived for browsing saved figures, tables and text without installation or Python execution. Their original filenames map to the current WorkedExample1 and WorkedExample2 notebooks. Download URLs, timestamps and original checksums are recorded; the browser title and added navigation header are the only presentation changes. Their execution version is unknown, and the saved scientific results were not regenerated for this release.
 
 Current README, Colab/Pages links, notebook setup tags, and release downloads use 0.1.6. Archived HTML navigation links use the same version; their original scientific content remains unchanged. Scientific algorithms, default analysis parameters, and frozen input packs are unchanged from 0.1.5. Earlier tags and release assets remain available. See the [validation record](https://github.com/Liisa-Holm-group/DaliScope/blob/v0.1.6/docs/validation.md) for the checks performed and their limits.
+
+## DaliScope 0.1.5
+
+Bundled the complete Pfam descriptions reference for local pack generation and clarified that DALI data packs are self-contained. Tutorial computations and example datasets are unchanged from 0.1.4. The standardized notebook names remain `RunDaliScope.ipynb`, `WorkedExample1.ipynb`, and `WorkedExample2.ipynb`.
+
+## DaliScope 0.1.3
+
+Refreshed Matplotlib backend discovery after live installation and preserved existing widget figures while later display/profile plots are drawn. The notebooks use standard Python 3 kernel metadata for Colab. Scientific algorithms and example data are unchanged from 0.1.2. Hosted Colab execution and frontend checks are recorded in the [validation record](validation.md).

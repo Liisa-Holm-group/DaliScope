@@ -10,14 +10,14 @@ DaliScope analyzes an existing [DALI data pack](http://ekhidna2.biocenter.helsin
 
 Open the saved **HTML example outputs** directly in your browser. No installation or code execution is needed.
 
-- [WorkedExample1 — HTML example output](https://liisa-holm-group.github.io/DaliScope/example-outputs/WorkedExample1.html): multidomain analysis and sequence signatures (originally `SignatureTest.html`).
-- [WorkedExample2 — HTML example output](https://liisa-holm-group.github.io/DaliScope/example-outputs/WorkedExample2.html): GOLD fold communities and structural clustering (originally `WorkedExample-6.html`).
+- [WorkedExample1 — HTML example output](https://liisa-holm-group.github.io/DaliScope/example-outputs/WorkedExample1.html): multidomain analysis and sequence signatures.
+- [WorkedExample2 — HTML example output](https://liisa-holm-group.github.io/DaliScope/example-outputs/WorkedExample2.html): GOLD fold communities and structural clustering.
 
-These author-supplied exports preserve saved figures, tables and text. Python-backed controls require running the notebooks below. See the [HTML example-output page](https://liisa-holm-group.github.io/DaliScope/) and [source/provenance record](docs/example-outputs/README.md) for details.
+These saved examples include figures, tables, and text. Run the notebooks for Python-backed interactive controls. See [source and provenance](docs/example-outputs/README.md) for export details.
 
 ## Run in your browser with Colab
 
-Start with **[01_quickstart.ipynb in Colab](https://colab.research.google.com/github/Liisa-Holm-group/DaliScope/blob/v0.1.6/notebooks/01_quickstart.ipynb)**. Connect to a CPU runtime, then choose **Runtime → Run all**. The first setup cell downloads the matching DaliScope source and example packs, installs the Colab dependencies, and enables custom widgets. You do not need to install Python locally or choose a local Jupyter kernel.
+Start with **[01_quickstart.ipynb in Colab](https://colab.research.google.com/github/Liisa-Holm-group/DaliScope/blob/v0.1.6/notebooks/01_quickstart.ipynb)**. Connect to a CPU runtime, then choose **Runtime → Run all**. The setup cell installs DaliScope, downloads the example data, and enables interactive controls automatically. You do not need to install Python locally or manually download release attachments.
 
 | Notebook | Purpose | Colab |
 | --- | --- | --- |
@@ -26,17 +26,9 @@ Start with **[01_quickstart.ipynb in Colab](https://colab.research.google.com/gi
 | `WorkedExample1.ipynb` | Multidomain and sequence-signature case study; included ZN pack | [Open in Colab](https://colab.research.google.com/github/Liisa-Holm-group/DaliScope/blob/v0.1.6/notebooks/WorkedExample1.ipynb) |
 | `WorkedExample2.ipynb` | GOLD fold communities; automatically downloads the optional GOLD pack in Colab | [Open in Colab](https://colab.research.google.com/github/Liisa-Holm-group/DaliScope/blob/v0.1.6/notebooks/WorkedExample2.ipynb) |
 
-To analyze your own DALI data pack, open **[RunDaliScope in Colab](https://colab.research.google.com/github/Liisa-Holm-group/DaliScope/blob/v0.1.6/notebooks/RunDaliScope.ipynb)** and paste its direct download URL into the **`pack_source`** field before choosing **Runtime → Run all**. You can also use a local runtime path. Copy the archive download link, rather than the DALI results-page URL, and keep a permanent copy of the input pack. See [your own pack and the server launch link](docs/colab.md#use-your-own-dali-data-pack) for the steps.
+To analyze your own DALI data pack, open **[RunDaliScope in Colab](https://colab.research.google.com/github/Liisa-Holm-group/DaliScope/blob/v0.1.6/notebooks/RunDaliScope.ipynb)** and paste its direct download URL into the **`pack_source`** field before choosing **Runtime → Run all**. You can also enter a file path accessible to the notebook runtime. Copy the archive download link, rather than the DALI results-page URL, and keep a permanent copy of the input pack. See [your own pack and the server launch link](docs/colab.md#use-your-own-dali-data-pack) for the steps.
 
-These links use **v0.1.6** so notebook code and installed source match. After the default example finishes, explore its display controls. To change analysis inputs or domain/filter/motif choices, reload the project and execute subsequent sections in order, applying the new choices before registering views; existing view names are retained on rerun. The comprehensive notebook leaves its expensive community step off by default; GOLD runs community analysis. Case-study choices and biological interpretations apply to their frozen input datasets.
-
-Version 0.1.6 adds a direct data-pack URL or local-path input to `RunDaliScope.ipynb` and documents the standard Colab launch link for the DALI server. Scientific algorithms, default analysis parameters, and frozen example packs are unchanged from 0.1.5. The HTML examples above remain preserved author-supplied snapshots.
-
-Version 0.1.5 includes the complete Pfam descriptions reference for local pack generation and clarifies that DALI data packs are self-contained. Tutorial computations and example datasets are unchanged from 0.1.4; the standardized notebook names remain `RunDaliScope.ipynb`, `WorkedExample1.ipynb`, and `WorkedExample2.ipynb`.
-
-Version 0.1.3 refreshes Matplotlib backend discovery after live installation and preserves existing widget figures while later display/profile plots are drawn. Its notebooks use standard Python 3 kernel metadata for Colab. The scientific algorithms and example data are unchanged from 0.1.2.
-
-See the [Colab guide](docs/colab.md) for runtime setup, browser interaction, and downloading outputs. The 0.1.3 comprehensive workflow completed in a fresh hosted Colab runtime, including automatic backend setup and hit-plane redraw after later analysis. The [validation record](docs/validation.md) records the tested source, environments, and remaining frontend checks.
+These links use **v0.1.6** so notebook code and installed source match. To change data, domains, filters, or motifs, reload a fresh project and execute subsequent sections in order. See the [Colab guide](docs/colab.md) for setup, interactive controls, and downloading results.
 
 ## Run locally with Python 3.12
 
@@ -90,19 +82,7 @@ conda run --no-capture-output -n daliscope python -m jupyterlab
 - [Preparing your own data](docs/prepare-data.md): a portable pack generator and its database requirements.
 - [Examples and data provenance](notebooks/data/README.md): included datasets and the optional GOLD download.
 - [Validation](docs/validation.md): checks performed and practical limitations.
-- [Release notes](docs/release-notes.md): changes in the current release.
-- [Publishing guide](docs/publishing.md): creating the group repository and distributing larger data.
-
-## Tutorials
-
-| Notebook | Purpose | Input |
-| --- | --- | --- |
-| `01_quickstart.ipynb` | Short introduction with static and interactive output | Included 3ubpC pack |
-| `RunDaliScope.ipynb` | Comprehensive workflow with user-controlled domain and motif steps | Included 3ubpC pack |
-| `WorkedExample1.ipynb` | Multidomain analysis and sequence signatures | Included ZN pack |
-| `WorkedExample2.ipynb` | GOLD-like fold communities and STRUCTAL/Infomap analysis | Optional GOLD pack |
-
-The comprehensive workflow contains interactive and optional steps. Execute it section by section, adjusting the parameters for your query. Case-study parameters and biological interpretations apply to their frozen input datasets.
+- [Release notes](docs/release-notes.md): current changes and version history.
 
 ## Minimal Python example
 
@@ -128,7 +108,7 @@ python -m pytest -q
 python -m build
 ```
 
-Tests exercise the bundled example, session persistence, optional annotations, database namespace handling, and graph partition input. GitHub Actions also runs the quickstart notebook in a fresh kernel.
+Tests exercise the bundled example, session persistence, optional annotations, database namespace handling, and graph partition input. GitHub Actions also runs the quickstart notebook in a fresh kernel. For release maintenance, see the [publishing guide](docs/publishing.md).
 
 ## Contact and citation
 
