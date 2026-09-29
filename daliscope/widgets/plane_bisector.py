@@ -203,7 +203,7 @@ class BisectorSelectionWidget:
 
         # Create figure with auto-display suppressed. Without plt.ioff(),
         # plt.subplots() triggers matplotlib's interactive-mode auto-display
-        # in addition to the explicit display(self.fig.canvas) call below,
+        # in addition to the explicit canvas display below,
         # producing a duplicate ("shadow") copy of the canvas in the output.
         with plt.ioff():
             self.fig, self.ax = plt.subplots(figsize=(8, 6))
@@ -226,8 +226,13 @@ class BisectorSelectionWidget:
         ]))
         display(self.controls["angle"])
 
-        # Display matplotlib widget
-        display(self.fig.canvas)
+        # Embed the ipympl canvas to avoid the direct-display PNG preview
+        # involved in the reported detached-artist drawing error.
+        canvas = self.fig.canvas
+        if isinstance(canvas, widgets.Widget):
+            display(widgets.Box([canvas]))
+        else:
+            display(canvas)
 
     def _connect_events(self):
         canvas = self.fig.canvas
