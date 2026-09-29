@@ -17,6 +17,8 @@ These saved examples include figures, tables, and text. Run the notebooks for Py
 
 ## Run in your browser with Colab
 
+The [permanent RunDaliScope Colab entry](https://colab.research.google.com/github/Liisa-Holm-group/DaliScope/blob/latest/notebooks/RunDaliScope.ipynb) follows the latest published and verified release. Use the versioned tutorial links below to keep an analysis tied to a specific release.
+
 Start with **[01_quickstart.ipynb in Colab](https://colab.research.google.com/github/Liisa-Holm-group/DaliScope/blob/v0.1.7/notebooks/01_quickstart.ipynb)**. Connect to a CPU runtime, then choose **Runtime → Run all**. The setup cell installs DaliScope, downloads the example data, and enables interactive controls automatically. You do not need to install Python locally or manually download release attachments.
 
 | Notebook | Purpose | Colab |
