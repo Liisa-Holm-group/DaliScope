@@ -28,7 +28,7 @@ Start with **[01_quickstart.ipynb in Colab](https://colab.research.google.com/gi
 
 To analyze your own DALI data pack, open **[RunDaliScope in Colab](https://colab.research.google.com/github/Liisa-Holm-group/DaliScope/blob/v0.1.7/notebooks/RunDaliScope.ipynb)** and paste its direct download URL into the **`pack_source`** field before choosing **Runtime → Run all**. You can also enter a file path accessible to the notebook runtime. Copy the archive download link, rather than the DALI results-page URL, and keep a permanent copy of the input pack. See [your own pack and the server launch link](docs/colab.md#use-your-own-dali-data-pack) for the steps.
 
-These links use **v0.1.7** so notebook code and installed source match. To change data, domains, filters, or motifs, reload a fresh project and execute subsequent sections in order. See the [Colab guide](docs/colab.md) for setup, interactive controls, and downloading results.
+These links use **v0.1.7** so notebook code and installed source match. When moving from an earlier release, start a fresh Colab runtime before running the new notebook. To change data, domains, filters, or motifs, reload a fresh project and execute subsequent sections in order. See the [Colab guide](docs/colab.md) for setup, interactive controls, and downloading results.
 
 ## Run locally with Python 3.12
 
@@ -65,15 +65,16 @@ Open **`notebooks/01_quickstart.ipynb`**, select the **Python (DaliScope)** kern
 
 ### Update an existing installation
 
-Activate the existing DaliScope environment and run these commands from the repository root:
+Save and close any open DaliScope notebook tabs before updating, so an old tab cannot overwrite the updated notebook. Activate the existing DaliScope environment and run these commands from the repository root:
 
 ```bash
+git stash push -m "Before DaliScope 0.1.7"
 git fetch origin --tags
 git checkout v0.1.7
 python -m pip install -e ".[notebook]"
 ```
 
-Restart the notebook kernel after updating, then reopen the notebook from the repository and run it from the beginning. Keep your saved analyses and input packs. The existing environment can be reused.
+The first command preserves tracked local edits, including saved notebook outputs, in a Git stash; input packs and result files outside Git tracking stay in place. Reopen the updated notebook from the repository, restart its kernel, and run it from the beginning. The existing environment can be reused.
 
 ### Optional Conda alternative
 
