@@ -7,14 +7,16 @@ The public repository is [Liisa-Holm-group/DaliScope](https://github.com/Liisa-H
 1. Work on a branch and review the complete diff.
 2. Update `daliscope.__version__`, `CITATION.cff`, the download script's default tag, data instructions, notebook setup tags, current Colab/Pages links, release notes, and validation record together. Preserve version references describing historical tests or archived scientific output. If only the added navigation header in an archived HTML file changes, update its saved checksum in `docs/example-outputs/outputs.json`; keep the original download record unchanged.
 3. Install `.[notebook,packer,dev]`, run `python -m pip check` and `python -m pytest -q`, and execute the affected notebooks in fresh kernels with `scripts/validate_notebooks.py`. GOLD is required for the advanced example.
-4. Build with `python -m build` from the final clean checkout. For the clean source ZIP, export tracked files with `scripts/export_release.py` to an empty directory outside the repository; new helpers must already be tracked. Verify that the source distribution includes the reference requirements and three small packs, and that neither package includes GOLD or local files.
+4. Build with `python -m build` from the final clean checkout. Verify that the source distribution includes the reference requirements and three small packs, and that neither package includes GOLD or local files. If a custom source ZIP is needed, export tracked files with `scripts/export_release.py` to an empty directory outside the repository; new helpers must already be tracked.
 5. Merge only after the Windows and Ubuntu GitHub Actions checks pass. Create the release from the tested commit, with its corresponding version tag.
 
 The software license is MIT, copyright Liisa Holm group. Contact: `hao.liu@helsinki.fi`. A manuscript describing DaliScope is being prepared for submission; update this status after submission and add the paper citation when available.
 
 ## Attach files
 
-Attach the wheel, source distribution, a clean source ZIP, and a checksum manifest. Attach the unchanged `GOLD.tar.gz` as well: it is about 50 MiB and excluded from ordinary Git commits. Its dataset checksum is in `notebooks/data/datasets.json`.
+For future releases, attach the wheel, source distribution, and a checksum manifest. Attach the unchanged `GOLD.tar.gz` as well: it is about 50 MiB and excluded from ordinary Git commits. Its dataset checksum is in `notebooks/data/datasets.json`.
+
+GitHub provides source archives for each release, so an additional custom source ZIP is optional. Keep existing release attachments and their checksum manifests available to preserve download links. Colab tutorials install the package and obtain their example data automatically; users do not need to download these attachments manually.
 
 Use the Release attachment basenames in `checksums.json`, with `bytes` and `sha256` for each file. Keep every attachment in one directory for verification; do not encode the maintainer's local folder layout in the manifest. The manifest itself is not included in its own hash list.
 
@@ -22,7 +24,7 @@ For example, with a validated tag and authenticated GitHub CLI:
 
 ```bash
 gh release create v0.1.6 --repo Liisa-Holm-group/DaliScope --verify-tag --draft --title "DaliScope 0.1.6" --notes-file docs/release-notes.md
-gh release upload v0.1.6 /path/to/assets/GOLD.tar.gz /path/to/assets/daliscope-0.1.6-py3-none-any.whl /path/to/assets/daliscope-0.1.6.tar.gz /path/to/assets/DaliScope-0.1.6-source.zip /path/to/assets/checksums.json --repo Liisa-Holm-group/DaliScope
+gh release upload v0.1.6 /path/to/assets/GOLD.tar.gz /path/to/assets/daliscope-0.1.6-py3-none-any.whl /path/to/assets/daliscope-0.1.6.tar.gz /path/to/assets/checksums.json --repo Liisa-Holm-group/DaliScope
 ```
 
 Verify the draft attachments against `checksums.json`, then publish with `gh release edit v0.1.6 --draft=false --repo Liisa-Holm-group/DaliScope` and check their public downloads.
