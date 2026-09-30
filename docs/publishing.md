@@ -23,11 +23,11 @@ Use the Release attachment basenames in `checksums.json`, with `bytes` and `sha2
 Save only the current version's section of `docs/release-notes.md` to a separate notes file. For example, with a validated tag and authenticated GitHub CLI:
 
 ```bash
-gh release create v0.1.7 --repo Liisa-Holm-group/DaliScope --verify-tag --draft --title "DaliScope 0.1.7" --notes-file /path/to/current-release-notes.md
-gh release upload v0.1.7 /path/to/assets/GOLD.tar.gz /path/to/assets/daliscope-0.1.7-py3-none-any.whl /path/to/assets/daliscope-0.1.7.tar.gz /path/to/assets/checksums.json --repo Liisa-Holm-group/DaliScope
+gh release create v0.1.8 --repo Liisa-Holm-group/DaliScope --verify-tag --draft --title "DaliScope 0.1.8" --notes-file /path/to/current-release-notes.md
+gh release upload v0.1.8 /path/to/assets/GOLD.tar.gz /path/to/assets/daliscope-0.1.8-py3-none-any.whl /path/to/assets/daliscope-0.1.8.tar.gz /path/to/assets/checksums.json --repo Liisa-Holm-group/DaliScope
 ```
 
-Verify the draft attachments against `checksums.json`, then publish with `gh release edit v0.1.7 --draft=false --latest --repo Liisa-Holm-group/DaliScope` and check their public downloads.
+Verify the draft attachments against `checksums.json`, then publish with `gh release edit v0.1.8 --draft=false --latest --repo Liisa-Holm-group/DaliScope` and check their public downloads.
 
 Once the release exists, `python scripts/download_example.py GOLD` downloads and verifies the optional pack. For earlier versions, pass the corresponding tag explicitly, such as `--tag v0.1.0`.
 
@@ -35,14 +35,14 @@ Once the release exists, `python scripts/download_example.py GOLD` downloads and
 
 After publishing and verifying the public assets and notebook entry points, advance the `latest` branch to the exact release commit recorded in `checksums.json`. This branch supplies the DALI server's permanent [Launch Colab URL](https://colab.research.google.com/github/Liisa-Holm-group/DaliScope/blob/latest/notebooks/RunDaliScope.ipynb); the server maintainer does not need to change the button for each release.
 
-For the verified 0.1.7 release:
+For a verified 0.1.8 release:
 
 ```bash
 git fetch origin --tags
-git push origin 'v0.1.7^{commit}:refs/heads/latest'
+git push origin 'v0.1.8^{commit}:refs/heads/latest'
 ```
 
-Use the corresponding immutable version tag for a later release and verify that `latest` resolves to the manifest's commit. Keep this update fast-forward; do not force the branch or move an earlier version tag. Verify the public notebook at `latest` matches the released notebook and still selects its explicit version tag internally. Retain `DALISCOPE_RELEASE = "v0.1.7"` in the 0.1.7 notebook; a branch name is not a release asset tag. The pointer is maintained during each release, rather than tracking unreleased commits on `main`.
+Use the corresponding immutable version tag for a later release and verify that `latest` resolves to the manifest's commit. Keep this update fast-forward; do not force the branch or move an earlier version tag. Verify the public notebook at `latest` matches the released notebook and still selects its explicit version tag internally. Retain `DALISCOPE_RELEASE = "v0.1.8"` in the 0.1.8 notebook; a branch name is not a release asset tag. The pointer is maintained during each release, rather than tracking unreleased commits on `main`.
 
 ## Preserve reproducibility
 
