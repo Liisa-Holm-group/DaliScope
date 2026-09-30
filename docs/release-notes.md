@@ -1,5 +1,15 @@
 # Release notes
 
+## DaliScope 0.1.8
+
+Integrated Liisa Holm group's revised WorkedExample1 and WorkedExample2 notebooks. The examples add domain and motif diagrams, GOLD community illustrations, and a pairwise structure cartoon. Their GitHub sources omit saved execution output so the examples run cleanly from the first cell. Both tutorials keep the release-pinned Colab setup, their example data loading, and the corrected conversion from one-based PDB residues to zero-based clipping ranges. Claims about occupancy-weighted rigid-body fitting were corrected to match the implemented uniform least-squares fit.
+
+Applying the stated PDB residue ranges through the existing conversion changes the case-study populations relative to the authors' saved notebook outputs: ZN `dom_5_FOLD` is 1,173 rather than 1,176 targets, and GOLD `dom_FOLD` is 6,465 rather than 6,708. In the corrected GOLD run, the two inspected annotation-selected modules each remained one child on recursion; earlier claims of additional splits were not retained. Figures and manuscript numbers should be taken from the corrected run.
+
+The new pairwise cartoon helper retrieves a target structure from the DALI viewer endpoint and displays it with the query. It depends on that endpoint when the cartoon cell runs. Example HTML pages remain author-supplied earlier snapshots with unknown execution versions; they were not regenerated from these revised notebooks.
+
+The bundled datasets, DALI/Pfam annotations and core analysis algorithms are unchanged from 0.1.7. Current notebook links, source setup and GOLD release downloads use 0.1.8. See the [validation record](https://github.com/Liisa-Holm-group/DaliScope/blob/v0.1.8/docs/validation.md) for tested runtimes and limitations.
+
 ## DaliScope 0.1.7
 
 The plane-bisector selector embeds its existing ipympl canvas in an ipywidgets container, bypassing the initial direct-display PNG preview involved in the reported `AttributeError: 'NoneType' object has no attribute 'dpi'`. The live canvas, controls and event callbacks are retained, with the existing display fallback for non-widget backends. Interactive output requires a working widget frontend; the direct static PNG preview is no longer emitted.
