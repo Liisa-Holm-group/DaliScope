@@ -1,5 +1,17 @@
 # Validation record
 
+## 0.1.9 worked-example text and plot labels
+
+On 1 October 2026, the Windows Python 3.12.14 reference environment passed the pip dependency check and the full unit suite (**73 passed**, 15 existing upstream warnings). All four source notebooks passed nbformat validation and retained output-free source cells.
+
+All four notebooks executed from source in fresh local kernels: **8/8** quickstart, **30/30** RunDaliScope, **22/22** WorkedExample1, and **19/19** WorkedExample2 code cells. No notebook error outputs or traceback text were recorded. The validation process set PYTHONPATH to the 0.1.9 checkout because the reference environment also contains an older editable installation; each executed notebook reported DaliScope **0.1.9** from this checkout. RunDaliScope was rerun after a final Markdown typo correction.
+
+Using the unchanged example packs and analysis parameters, WorkedExample1 selected **1,173** dom_5_FOLD targets and reported **713** exact H-D-H pattern matches. WorkedExample2 loaded **12,245** alignments, selected **6,465** dom_FOLD targets and produced **23** structural modules. The GOLD pack SHA-256 was d3fc732890400446bd128fa178e9a3e13c3c28b1dac5c3656c76459185f660ed. These numbers match the corrected 0.1.8 run.
+
+The WorkedExample2 RMSD output was inspected with its **RMSD (Å)** horizontal label; the cohesion plot was inspected with distinct within/between box styling and a legend. A focused non-interactive Matplotlib smoke check also covered the changed plotting helpers. The author-supplied HTML pages were not regenerated; only their explanatory headers and current-notebook links changed, and the saved byte counts and SHA-256 hashes in docs/example-outputs/outputs.json match the edited files.
+
+These checks establish local notebook execution and plot generation. A hosted Colab browser run of the 0.1.9 worked examples and interactive manipulation of their controls were not verified in this record.
+
 ## 0.1.8 revised worked examples and structure cartoons
 
 On 30 September 2026, the Windows reference environment used Python 3.12.14, Matplotlib 3.11.2 and ipympl 0.10.0. Dependency checking passed, and the complete unit suite passed **73 tests** with 15 existing upstream warnings. Five new focused tests cover target-chain centering and rotation, DALI target URL construction, successful rendering input, and unavailable or inconsistent remote structures. The source notebooks validate as clean, output-free notebooks.

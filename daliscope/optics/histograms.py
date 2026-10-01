@@ -1929,7 +1929,7 @@ def global_plots(df):
     having different overall architectures.
     """)
 
-def plot_overlaid_distributions(series_list, bins=25, alpha=0.5, figsize=(6,3), title="Overlaid Distributions"):
+def plot_overlaid_distributions(series_list, bins=25, alpha=0.5, figsize=(6,3), title="Overlaid Distributions", xlabel="Value"):
     """
     Plots overlaid histograms for a list of pandas Series in a single plot.
     
@@ -1945,6 +1945,8 @@ def plot_overlaid_distributions(series_list, bins=25, alpha=0.5, figsize=(6,3), 
         Dimensions of the output plot.
     title : str, default "Overlaid Distributions"
         The title of the plot.
+    xlabel : str, default "Value"
+        Label for the horizontal axis.
     """
     fig, ax = plt.subplots(figsize=figsize)
     
@@ -1966,7 +1968,7 @@ def plot_overlaid_distributions(series_list, bins=25, alpha=0.5, figsize=(6,3), 
     
     # Style the single visual canvas
     ax.set_title(title, fontsize=10, fontweight='bold')
-    ax.set_xlabel("Value", fontsize=8)
+    ax.set_xlabel(xlabel, fontsize=8)
     ax.set_ylabel("Frequency", fontsize=8)
     
     # Show the legend to identify each Series

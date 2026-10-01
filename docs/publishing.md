@@ -10,7 +10,7 @@ The public repository is [Liisa-Holm-group/DaliScope](https://github.com/Liisa-H
 4. Build with `python -m build` from the final clean checkout. Verify that the source distribution includes the reference requirements and three small packs, and that neither package includes GOLD or local files. If a custom source ZIP is needed, export tracked files with `scripts/export_release.py` to an empty directory outside the repository; new helpers must already be tracked.
 5. Merge only after the Windows and Ubuntu GitHub Actions checks pass. Create the release from the tested commit, with its corresponding version tag.
 
-The software license is MIT, copyright Liisa Holm group. Contact: `hao.liu@helsinki.fi`. A manuscript describing DaliScope is being prepared for submission; update this status after submission and add the paper citation when available.
+The software license is MIT, copyright Liisa Holm group. Contact: `hao.liu@helsinki.fi`. A manuscript describing DaliScope has been submitted; add the paper citation when available.
 
 ## Attach files
 
@@ -23,11 +23,11 @@ Use the Release attachment basenames in `checksums.json`, with `bytes` and `sha2
 Save only the current version's section of `docs/release-notes.md` to a separate notes file. For example, with a validated tag and authenticated GitHub CLI:
 
 ```bash
-gh release create v0.1.8 --repo Liisa-Holm-group/DaliScope --verify-tag --draft --title "DaliScope 0.1.8" --notes-file /path/to/current-release-notes.md
-gh release upload v0.1.8 /path/to/assets/GOLD.tar.gz /path/to/assets/daliscope-0.1.8-py3-none-any.whl /path/to/assets/daliscope-0.1.8.tar.gz /path/to/assets/checksums.json --repo Liisa-Holm-group/DaliScope
+gh release create v0.1.9 --repo Liisa-Holm-group/DaliScope --verify-tag --draft --title "DaliScope 0.1.9" --notes-file /path/to/current-release-notes.md
+gh release upload v0.1.9 /path/to/assets/GOLD.tar.gz /path/to/assets/daliscope-0.1.9-py3-none-any.whl /path/to/assets/daliscope-0.1.9.tar.gz /path/to/assets/checksums.json --repo Liisa-Holm-group/DaliScope
 ```
 
-Verify the draft attachments against `checksums.json`, then publish with `gh release edit v0.1.8 --draft=false --latest --repo Liisa-Holm-group/DaliScope` and check their public downloads.
+Verify the draft attachments against `checksums.json`, then publish with `gh release edit v0.1.9 --draft=false --latest --repo Liisa-Holm-group/DaliScope` and check their public downloads.
 
 Once the release exists, `python scripts/download_example.py GOLD` downloads and verifies the optional pack. For earlier versions, pass the corresponding tag explicitly, such as `--tag v0.1.0`.
 
@@ -35,14 +35,14 @@ Once the release exists, `python scripts/download_example.py GOLD` downloads and
 
 After publishing and verifying the public assets and notebook entry points, advance the `latest` branch to the exact release commit recorded in `checksums.json`. This branch supplies the DALI server's permanent [Launch Colab URL](https://colab.research.google.com/github/Liisa-Holm-group/DaliScope/blob/latest/notebooks/RunDaliScope.ipynb); the server maintainer does not need to change the button for each release.
 
-For a verified 0.1.8 release:
+For a verified 0.1.9 release:
 
 ```bash
 git fetch origin --tags
-git push origin 'v0.1.8^{commit}:refs/heads/latest'
+git push origin 'v0.1.9^{commit}:refs/heads/latest'
 ```
 
-Use the corresponding immutable version tag for a later release and verify that `latest` resolves to the manifest's commit. Keep this update fast-forward; do not force the branch or move an earlier version tag. Verify the public notebook at `latest` matches the released notebook and still selects its explicit version tag internally. Retain `DALISCOPE_RELEASE = "v0.1.8"` in the 0.1.8 notebook; a branch name is not a release asset tag. The pointer is maintained during each release, rather than tracking unreleased commits on `main`.
+Use the corresponding immutable version tag for a later release and verify that `latest` resolves to the manifest's commit. Keep this update fast-forward; do not force the branch or move an earlier version tag. Verify the public notebook at `latest` matches the released notebook and still selects its explicit version tag internally. Retain `DALISCOPE_RELEASE = "v0.1.9"` in the 0.1.9 notebook; a branch name is not a release asset tag. The pointer is maintained during each release, rather than tracking unreleased commits on `main`.
 
 ## Preserve reproducibility
 
