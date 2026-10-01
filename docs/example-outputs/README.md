@@ -1,6 +1,6 @@
 # HTML example outputs
 
-These author-supplied notebook exports let users browse saved figures, tables and text **without installing software or running code**.
+These author-supplied notebook exports let users browse saved figures, tables and text **without installing software or running code**. They are historical snapshots, not v0.1.9 outputs: the saved WorkedExample1 and WorkedExample2 populations contain 1,176 and 6,708 targets, while current v0.1.9 runs contain 1,173 and 6,465.
 
 | Current example | Browse HTML | Original export |
 | --- | --- | --- |
@@ -26,7 +26,7 @@ The temporary source URLs may expire. These archived copies remain in this repos
 
 Their browser titles and a small header identify them as HTML example outputs and map the original names to the current notebook names. Scientific code, saved outputs, embedded figures and viewer data are otherwise unchanged. Reversing those two presentation changes reproduces the downloaded source bytes exactly.
 
-The exports do not record their execution version, commit or data-pack checksum. They are preserved author-supplied snapshots, not results regenerated with current releases. Links to runnable notebooks use v0.1.8 independently of these snapshots.
+The exports do not record their execution version, commit or data-pack checksum. They are preserved author-supplied snapshots, not results regenerated with current releases. Links to runnable notebooks use v0.1.9 independently of these snapshots.
 
 Original download SHA-256:
 

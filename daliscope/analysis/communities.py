@@ -304,12 +304,23 @@ def plot_module_score_distributions(
     else:
         fig = ax.get_figure()
 
-    ax.boxplot(
+    boxplot = ax.boxplot(
         data,
         positions=positions,
         widths=0.5,
         showfliers=showfliers,
+        patch_artist=True,
     )
+    for index, box in enumerate(boxplot["boxes"]):
+        box.set_facecolor("#4C78A8" if index % 2 == 0 else "#F58518")
+        if index % 2:
+            box.set_hatch("//")
+    if len(boxplot["boxes"]) >= 2:
+        ax.legend(
+            boxplot["boxes"][:2],
+            ["Within module", "Between module"],
+            loc="upper right",
+        )
 
     # Center label ticks halfway between the 'within' and 'between' boxes
     ax.set_xticks(positions_within + 0.325)

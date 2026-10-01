@@ -11,8 +11,8 @@
     "bytes": 3697461,
     "sha256": "32938ce14f0edc7ff0c306366d13b8b7ef37b9f5bb50d2a037311814cd5dfdd3",
     "retrieved_utc": "2026-09-28T19:45:38.793786+00:00",
-    "saved_bytes": 3698805,
-    "saved_sha256": "7ac1908c8379cd2c720f5287dc9726a16ff9fcf3dd7e6862238b38e20a8cc10e",
+    "saved_bytes": 3698940,
+    "saved_sha256": "4bc652c1de27fa0434650237264968b48975cb8ab9ba5d311dbba1983db2547e",
     "execution_version": null,
     "changes": [
       "Browser title identifies the current example name and HTML example output.",
@@ -32,8 +32,8 @@
     "bytes": 3015290,
     "sha256": "333b222d85c22f4bad6db9f7a21f6911476919674f9cc9bf16f98341ab15ce81",
     "retrieved_utc": "2026-09-28T19:45:39.547708+00:00",
-    "saved_bytes": 3016634,
-    "saved_sha256": "546ccca0010273721d3768e074d92e7663176f693aad97188745aa7960645878",
+    "saved_bytes": 3016767,
+    "saved_sha256": "05b5f576144db213e636387107c17337ef23e7c1ee6694d2124f88764199c792",
     "execution_version": null,
     "changes": [
       "Browser title identifies the current example name and HTML example output.",

@@ -1,5 +1,13 @@
 # Release notes
 
+## DaliScope 0.1.9
+
+Clarified the worked examples against the submitted manuscript and current notebook results. WorkedExample1 now describes the Domain 3/4 and CUPIN association, domain co-occurrence, structurally anchored motif search, and candidate metal-binding sites with appropriate limits; unfinished prose and unsupported functional claims were removed. WorkedExample2 wording now follows the analyses actually shown. Plot labels identify the compared RMSD or community-score distributions more clearly.
+
+The author-supplied HTML exports are labelled as historical snapshots and link to the current notebooks. Their saved scientific content remains unchanged; the output manifest records the updated header bytes and checksums. Notebook setup, Colab links, package version, and GOLD download instructions select v0.1.9.
+
+Example data, DALI/Pfam annotations, domain selection, clustering and motif calculations are unchanged from 0.1.8. The corrected 0.1.8 example populations remain 1,173 ZN and 6,465 GOLD targets. The HTML exports still show their earlier 1,176 and 6,708 counts and should not be used as current numerical results.
+
 ## DaliScope 0.1.8
 
 Integrated Liisa Holm group's revised WorkedExample1 and WorkedExample2 notebooks. The examples add domain and motif diagrams, GOLD community illustrations, and a pairwise structure cartoon. Their GitHub sources omit saved execution output so the examples run cleanly from the first cell. Both tutorials keep the release-pinned Colab setup, their example data loading, and the corrected conversion from one-based PDB residues to zero-based clipping ranges. Claims about occupancy-weighted rigid-body fitting were corrected to match the implemented uniform least-squares fit.
