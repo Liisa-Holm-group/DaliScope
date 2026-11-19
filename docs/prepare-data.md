@@ -46,7 +46,3 @@ The Pfam annotation database has `hmmer_hits` with `target_name`, `query_accessi
 The optional ligand database has `ligand` (`pdb_id`, `chain_id`, `res_name`, `hetatm`) and `ligand_names` (`res_name`, `compound`). These per-protein annotation, structure, and ligand databases are server resources and are not bundled with this repository; the Pfam descriptions reference is bundled.
 
 Missing proteins/shards are reported and skipped by the coordinate producer. Inspect the reported counts and archive contents before interpreting incomplete populations. A synthetic database fixture is exercised in the release tests; production database provisioning remains a group-server task.
-
-## Related tools
-
-The group's [ISS_tools](https://github.com/Liisa-Holm-group/ISS_tools) provides DALI output conversion and Pfam annotation workflows. Confirm that its output contains the equivalence fields expected by this generator. See [data format](data-format.md) for the final archive contract.
