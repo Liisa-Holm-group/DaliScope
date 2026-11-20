@@ -159,8 +159,10 @@ def test_pack_cli_bundles_pfam_descriptions_from_an_unrelated_directory(generato
         descriptions = pd.read_csv(pack.extractfile("mini_pfam_names.tsv"), sep="\t",
                                    dtype=str, keep_default_na=False)
     assert descriptions.to_dict("records") == [{
-        "pfam": "PF00001", "clan": "CL0192", "clan_short": "GPCR_A",
-        "short": "7tm_1", "name": "7 transmembrane receptor (rhodopsin family)",
+        "pfam": "PF00001", "clan": "CL0192",
+        "name": "7 transmembrane receptor (rhodopsin family)", "short": "7tm_1", "type": "Domain",
+        "clan_name": "Family A G protein-coupled receptor-like superfamily",
+        "clan_short": "GPCR_A", "clan_entries": "83",
     }]
     loaded = Project.load_pack(str(archive))
     assert next(iter(loaded.views.values())).iloc[0]["pfam"] == "PF00001"

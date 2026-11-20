@@ -72,7 +72,7 @@ def test_pack_without_optional_annotations_loads(tmp_path):
     assert df["pfam"].eq("Unassigned").all()
 
 
-@pytest.mark.parametrize("namespace,label", [("1", "PDB"), (4, "VIRO3D")])
+@pytest.mark.parametrize("namespace,label", [("1", "PDB"), (4, "VIRO3D"), (4, "Viro3D")])
 def test_pfam_database_filtering_uses_numeric_namespace(tmp_path, namespace, label):
     database = tmp_path / "annotations.db"
     with sqlite3.connect(database) as conn:
@@ -86,6 +86,52 @@ def test_pfam_database_filtering_uses_numeric_namespace(tmp_path, namespace, lab
     assert len(result) == 1
     assert result.loc[0, "database"] == label
     assert result.loc[0, "clan"] == "CL0001"
+
+
+@pytest.mark.parametrize("with_old_tables", [False, True])
+def test_pfam_hits_with_clan_table_is_used(tmp_path, with_old_tables):
+    # Pfam 39.0 databases keep the clan in hmmer_hits_with_CL and store the Viro3D label in mixed case.
+    database = tmp_path / "annotations.db"
+    with sqlite3.connect(database) as conn:
+        conn.execute("CREATE TABLE hmmer_hits_with_CL (target_name TEXT, query_accession TEXT, e_value REAL, "
+                     "env_from INT, env_to INT, database TEXT, CL TEXT)")
+        conn.executemany("INSERT INTO hmmer_hits_with_CL VALUES (?, ?, 1e-8, 1, 10, ?, ?)", [
+            ("target_name", "query_accession", "database", "CL"),  # header row imported as data
+            ("hitA", "PF00001", "Viro3D", "CL0192"),
+            ("hitA", "PF10417", "Viro3D", "PF10417"),
+            ("hitA", "PF00001", "PDB", "CL0192"),
+            ("unwantedA", "PF00001", "Viro3D", "CL0192"),
+        ])
+        if with_old_tables:
+            conn.execute("CREATE TABLE hmmer_hits (target_name TEXT, query_accession TEXT, e_value REAL, env_from INT, env_to INT, database TEXT)")
+            conn.execute("CREATE TABLE pfam_entries (AC TEXT, CL TEXT)")
+            conn.execute("INSERT INTO hmmer_hits VALUES ('hitA', 'PF99999', 1e-8, 1, 10, 'Viro3D')")
+    output = tmp_path / "pfam.tsv"
+    extract_hits(database, ["hitA"], 4, output)
+    result = pd.read_csv(output, sep="\t")
+    assert list(result.columns) == ["target_name", "query_accession", "e_value", "env_from", "env_to",
+                                    "database", "CL", "clan"]
+    assert sorted(result["query_accession"]) == ["PF00001", "PF10417"]
+    assert result.set_index("query_accession")["clan"].to_dict() == {"PF00001": "CL0192", "PF10417": "PF10417"}
+
+
+def test_pfam_database_without_hit_tables_is_reported(tmp_path):
+    database = tmp_path / "annotations.db"
+    with sqlite3.connect(database) as conn:
+        conn.execute("CREATE TABLE version (database TEXT, version TEXT, date TEXT)")
+    with pytest.raises(ValueError, match="hmmer_hits"):
+        extract_hits(database, ["hitA"], 1, tmp_path / "pfam.tsv")
+
+
+def test_bundled_pfam_names_cover_the_columns_used_by_the_analysis():
+    names = pd.read_csv(ROOT / "daliscope" / "packer" / "data" / "pfam_names.tsv", sep="\t",
+                        dtype=str, keep_default_na=False)
+    assert {"pfam", "clan", "clan_short", "short", "name"} <= set(names.columns)
+    assert len(names) == 53275 and names["pfam"].is_unique
+    assert names["pfam"].str.match(r"^PF\d{5}$").all()
+    no_clan = names["clan"] == names["pfam"]
+    assert names.loc[~no_clan, "clan"].str.match(r"^CL\d{4}$").all()
+    assert (names.loc[no_clan, "clan_short"] == "").all()
 
 
 def test_missing_pfam_database_does_not_create_an_empty_database(tmp_path):
