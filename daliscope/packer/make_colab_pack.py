@@ -35,7 +35,7 @@ def build_parser():
     parser.add_argument(
         "--pfam-names", type=Path,
         default=Path(__file__).resolve().parent / "data" / "pfam_names.tsv",
-        help="Full Pfam description TSV (default: bundled Pfam 38.2 reference)",
+        help="Full Pfam description TSV (default: bundled Pfam 39.0 reference)",
     )
     parser.add_argument("--ligand-db", type=Path, help="Optional PDB ligand SQLite database")
     parser.add_argument("--output-dir", type=Path, default=Path.cwd())

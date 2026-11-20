@@ -135,4 +135,4 @@ A manuscript describing DaliScope has been submitted. Publication details will b
 
 DaliScope code and its original documentation are distributed under the [MIT License](LICENSE), copyright 2026 Liisa Holm group. Third-party structures and annotations retain their source providers' terms; see the [data provenance notes](notebooks/data/README.md). A software license does not replace the licenses of source data or accompanying publications.
 
-The bundled [Pfam 38.2 descriptions reference](daliscope/packer/data/README.md) is distributed under CC0-1.0, with its upstream source and checksums recorded separately.
+The bundled [Pfam 39.0 descriptions reference](daliscope/packer/data/README.md) is distributed under CC0-1.0, with its source and checksum recorded separately.

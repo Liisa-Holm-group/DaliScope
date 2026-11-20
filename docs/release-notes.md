@@ -1,5 +1,9 @@
 # Release notes
 
+## Unreleased
+
+The local packer reads Pfam 39.0 annotation databases, which keep hits and clans in one table (`hmmer_hits_with_CL`); Pfam 38.2 databases with `hmmer_hits` and `pfam_entries` still work. Viro3D targets (namespace 4) now receive their Pfam hits: the databases store the label `Viro3D`, which the packer previously queried as `VIRO3D` and therefore found no hits. The bundled description table is now the Pfam 39.0 table used by the DALI data-pack service (53,275 families, eight columns). The example packs, which carry their own Pfam 38.2 annotations, and the analysis code are unchanged.
+
 ## DaliScope 0.1.9
 
 Clarified the worked examples against the submitted manuscript and current notebook results. WorkedExample1 now describes the Domain 3/4 and CUPIN association, domain co-occurrence, structurally anchored motif search, and candidate metal-binding sites with appropriate limits; unfinished prose and unsupported functional claims were removed. WorkedExample2 wording now follows the analyses actually shown. Plot labels identify the compared RMSD or community-score distributions more clearly.

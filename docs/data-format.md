@@ -30,8 +30,8 @@ Official [DALI data packs](http://ekhidna2.biocenter.helsinki.fi/dali/colab.html
 
 | File | Fields | Purpose |
 | --- | --- | --- |
-| `pfam.tsv` | `target_name`, `query_accession`, `e_value`, `env_from`, `env_to`, `database`, `clan` | Pfam hits; envelope positions are one-based |
-| `mini_pfam_names.tsv` | `pfam`, `clan`, `clan_short`, `short`, `name` | Family and clan descriptions |
+| `pfam.tsv` | `target_name`, `query_accession`, `e_value`, `env_from`, `env_to`, `database`, `clan`; packs from Pfam 39.0 databases also `CL` (same as `clan`) | Pfam hits; envelope positions are one-based |
+| `mini_pfam_names.tsv` | `pfam`, `clan`, `clan_short`, `short`, `name`; newer packs also `type`, `clan_name`, `clan_entries` | Family and clan descriptions |
 | `mini_ligand.tsv` | `pdb_id`, `chain_id`, `res_name`, `hetatm` | Ligand records for PDB targets |
 | `mini_ligand_names.tsv` | `res_name`, `compound` | Ligand names |
 
