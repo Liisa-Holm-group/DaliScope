@@ -16,6 +16,7 @@ def test_lasso_and_save_keep_the_scatter_controls_visible(monkeypatch):
     monkeypatch.setattr(explorer, "display", cell.append)
 
     project = Project()
+    project.add_view("other", pd.DataFrame({"target_id": ["other"], "score": [0.]}))
     project.add_view("full", pd.DataFrame({
         "target_id": ["one", "two", "three", "four"],
         "z_score": [1., 2., 3., 4.], "query_coverage": [.1, .2, .3, .4],
@@ -62,3 +63,11 @@ def test_lasso_and_save_keep_the_scatter_controls_visible(monkeypatch):
     assert button("Save Subset") is save and save.disabled
     assert any(isinstance(w, go.FigureWidget) for w in visible_widgets())
     assert any("my_lasso" in str(getattr(w, "value", "")) for w in visible_widgets())
+
+    view = next(w for w in visible_widgets()
+                if isinstance(w, widgets.Dropdown) and w.description == "View:")
+    assert view.options == ("other", "full", "my_lasso")
+    assert view.value == "full"
+    view.value = "my_lasso"
+    subset_plot = next(w for w in visible_widgets() if isinstance(w, go.FigureWidget))
+    assert {row[0] for trace in subset_plot.data for row in trace.customdata} == {"one", "four"}
