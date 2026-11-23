@@ -16,6 +16,10 @@ The WorkedExample2 RMSD output was inspected with its **RMSD (Å)** horizontal l
 
 These checks establish local notebook execution and plot generation. A hosted Colab browser run of the 0.1.9 worked examples and interactive manipulation of their controls were not verified in this record.
 
+## Hosted Colab lasso in 0.1.9
+
+On 23 November 2026, a hosted Colab CPU runtime ran the 0.1.9 setup with the corrected scatterplot widget from commit b69bf91674b5c646348538f25554e8e06cedd6bf. In the bundled 3ubpC example, a freehand lasso selected 14 targets from the parent view dom_0-570. Both the plot and Save Subset stayed visible. The 14 unique target IDs from the Plotly LassoSelector event exactly matched the IDs read back from the registered subset colab_lasso_retest.
+
 ## 0.1.8 revised worked examples and structure cartoons
 
 On 30 September 2026, the Windows reference environment used Python 3.12.14, Matplotlib 3.11.2 and ipympl 0.10.0. Dependency checking passed, and the complete unit suite passed **73 tests** with 15 existing upstream warnings. Five new focused tests cover target-chain centering and rotation, DALI target URL construction, successful rendering input, and unavailable or inconsistent remote structures. The source notebooks validate as clean, output-free notebooks.
