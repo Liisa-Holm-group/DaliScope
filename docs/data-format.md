@@ -35,10 +35,10 @@ Official [DALI data packs](http://ekhidna2.biocenter.helsinki.fi/dali/colab.html
 | `mini_ligand.tsv` | `pdb_id`, `chain_id`, `res_name`, `hetatm` | Ligand records for PDB targets |
 | `mini_ligand_names.tsv` | `res_name`, `compound` | Ligand names |
 
-The local preparation command requires a Pfam annotation database and bundles descriptions selected from its packaged reference (or an explicit `--pfam-names` replacement). The loader also accepts custom packs that omit these annotation files; in that compatibility mode, retained hits are labeled `Unassigned`. Ligand files are optional.
+For reference namespaces the local preparation command requires a Pfam annotation database and bundles descriptions selected from its packaged reference (or an explicit `--pfam-names` replacement). The loader also accepts custom packs that omit these annotation files; in that compatibility mode, retained hits are labeled `Unassigned`. Ligand files are optional.
 
 ## Namespaces and provenance
 
-Namespaces are `1=PDB`, `2=AFDB2`, `3=BFVD`, and `4=VIRO3D`. Alignments whose targets were not packed can be absent from derived views; compare summary and packed-target counts.
+Namespaces are `1=PDB`, `2=AFDB2`, `3=BFVD`, `4=VIRO3D`, and `5=LOCAL`. Use LOCAL for private identifiers. Local targets can be packed without annotations or with a matching annotation database whose hit rows have `database=LOCAL`. Alignments whose targets were not packed can be absent from derived views; compare summary and packed-target counts.
 
 Record source/database versions, query and chain, search settings, generation date, and SHA-256 checksum. The frozen examples' identifiers and checksums are in `notebooks/data/datasets.json`; upstream database release dates were not recorded in the supplied packs.

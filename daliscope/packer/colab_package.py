@@ -203,13 +203,13 @@ def main(argv=None):
     import argparse
     from pathlib import Path
     parser = argparse.ArgumentParser(description="Build coordinate/sequence arrays from a protein ledger")
-    parser.add_argument("namespace", type=int, choices=(1, 2, 3, 4))
+    parser.add_argument("namespace", type=int, choices=(1, 2, 3, 4, 5))
     parser.add_argument("--database", type=Path, required=True)
     parser.add_argument("--shards", type=Path, required=True)
     parser.add_argument("--id-mapping", type=Path, default=Path("id_mapping.tsv"))
     parser.add_argument("--output", default="colab_pack")
     args = parser.parse_args(argv)
-    df = pd.read_csv(args.id_mapping, sep="\t")
+    df = pd.read_csv(args.id_mapping, sep="\t", dtype={"target_id": str}, keep_default_na=False)
     create_colab_package(df["target_id"].drop_duplicates().tolist(), args.namespace,
                          str(args.database), str(args.shards), args.output)
     if not Path(f"{args.output}.npz").is_file():

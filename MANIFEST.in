@@ -2,6 +2,7 @@ include README.md LICENSE CITATION.cff
 recursive-include docs *.md *.png *.html *.json
 include docs/.nojekyll
 include docs/requirements-windows-py312.txt
+include examples/local-pack/README.md examples/local-pack/inputs.zip
 recursive-include tests *.py
 recursive-include scripts *.py
 include daliscope/packer/make_colab_pack.csh
