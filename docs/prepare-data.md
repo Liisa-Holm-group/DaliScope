@@ -48,6 +48,13 @@ The output is `structures/master_ledger.db` and `structures/shards/`. The tool s
 - **Predicted structures.** For `AFDB2`, include the matching model in the `model` column. The builder reads the first model, defaults to chain A, and takes Cα confidence from its B-factor field. PDB and mmCIF files, including gzipped files, are supported. The coordinate order and residue set must match the DALI file used by the alignment. In particular, use the corresponding clipped model if the search uses clipped target numbering.
 - **Your own identifiers.** Use `LOCAL` for both commands. Supply a target DALI file for each hit and include `model` for predicted targets with pLDDT. Omit `--pfam-db` when you have no annotations. To include your own annotations, use a compatible database with `database=LOCAL` and `target_name` values matching the search IDs. The Zenodo snapshots use the Dali reference IDs and namespaces. A UniProt accession or lab identifier must first be mapped to its matching reference record before using those annotations.
 
+For example, to pack hits from your own target collection without Pfam, run these commands from the directory containing your manifest, query and results.
+
+```bash
+daliscope-build-store results.tsv LOCAL targets.tsv --output-dir my-structures
+daliscope-pack results.tsv LOCAL my_query query.pdb A query.dat --ledger-db my-structures/master_ledger.db --shard-dir my-structures/shards --output-dir output
+```
+
 For custom IDs containing leading zeros or values such as `NA`, use the checkout containing this guide to load the pack in local Jupyter. The published v0.1.9 notebooks predate preservation of these IDs. Core coordinate-based views work with the packed structures. The optional full-atom cartoon fetches coordinates using Dali server identifiers.
 
 One invocation handles one target namespace. Use separate packs for searches against different identifier systems.
