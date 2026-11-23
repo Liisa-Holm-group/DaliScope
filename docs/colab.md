@@ -43,11 +43,11 @@ The comprehensive `RunDaliScope.ipynb` leaves its expensive community pipeline o
 
 ## Use the browser controls
 
-The setup enables Colab's custom widget manager for the domain viewer, ipywidgets, Plotly controls, and Matplotlib widget backend. Version 0.1.3 keeps existing widget figures available when later display/profile plots are drawn and cleaned up. After later sections finish, return to the comprehensive tutorial's hit-plane plot, switch its selected view, and check that the plotted points update along with the controls. Some viewers also load JavaScript from external servers. An emitted widget without working mouse controls is not a completed frontend check.
+The setup enables Colab's custom widget manager for the domain viewer, ipywidgets, Plotly controls, and Matplotlib widget backend. Version 0.1.3 keeps existing widget figures available when later display/profile plots are drawn and cleaned up. In RunDaliScope section 4.1, choose a parent view and use the scatterplot toolbar to select targets. Some viewers also load JavaScript from external servers. An emitted widget without working mouse controls is not a completed frontend check.
 
 - Rotate and zoom the py3Dmol structure; use available target controls to change the selected structure.
 - In the domain viewer, edit the PDB domain text and click **Apply**. Verify that the coloring and domain-centering buttons respond. **Reset** restores the initial ranges. If testing an edit before running a case study, reset it before registering the domains.
-- Hover over Plotly points, zoom, and switch the selected view. Changes should update the displayed data.
+- Choose **Lasso Select**, draw around the points, and check the selected target count. Enter a subset name or keep the suggested one, then click **Save Subset**. The confirmation identifies the parent view and the number of saved targets.
 - In panels with **↺ Refresh**, choose the view or grouping, then click that button to regenerate the plot and refresh available views. For example, the Pfam/Clan violin panel changes its chart titles and distributions after selecting `pfam` and clicking Refresh.
 - Apply selection/profile choices before the cells that lock their values and register a view. If that view was already registered, reload a fresh project and work through the sections again, or choose a new unique view name. Display changes do not automatically rebuild subsequent analysis.
 
@@ -88,7 +88,7 @@ The v0.1.9 Colab links, setup source checkout, and GOLD release selection use th
 
 The 0.1.3 comprehensive workflow completed all 29 non-empty tutorial code cells in a fresh hosted Colab runtime on 28 September 2026. Setup installed the dependencies and refreshed backend discovery automatically. After the final analysis, switching the existing hit-plane widget to `dom_1` visibly updated the axes and plotted points. This pre-release check used the public source commit, with only the initial clone adapted to its branch because the release tag was not yet available; see [validation](validation.md) for exact provenance.
 
-The earlier published v0.1.2 quickstart completed its eight original code cells on hosted Colab, including PNG/TSV/session creation, restoration, and visible py3Dmol rendering. Domain Apply/Reset and centering were checked there. Direct mouse rotation/zoom in py3Dmol, Plotly mouse controls, and browser file downloads remain unverified. Hosted WorkedExample1 and the complete hosted GOLD analysis have not been recorded. The immutable v0.1.2 documentation and release assets retain their earlier snapshot.
+The earlier published v0.1.2 quickstart completed its eight original code cells on hosted Colab, including PNG/TSV/session creation, restoration, and visible py3Dmol rendering. Domain Apply/Reset and centering were checked there. That run did not exercise direct mouse rotation/zoom in py3Dmol, Plotly mouse controls, or browser file downloads. The 0.1.9 hosted lasso check is recorded in [validation](validation.md#hosted-colab-lasso-in-019). Hosted WorkedExample1 and the complete hosted GOLD analysis have not been recorded. The immutable v0.1.2 documentation and release assets retain their earlier snapshot.
 
 ## Server launcher configuration
 

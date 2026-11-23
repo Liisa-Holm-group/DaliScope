@@ -2,6 +2,8 @@
 
 ## DaliScope 0.1.9
 
+**23 November 2026 Colab correction.** RunDaliScope section 4.1 keeps the scatterplot and **Save Subset** visible after a lasso selection. The two plane-bisection fallback cells have been removed. Reopen the notebook with a fresh Colab runtime to load this revision. The previous 0.1.9 source is available at [9eb05b6](https://github.com/Liisa-Holm-group/DaliScope/tree/9eb05b671327af7b324af90e1752d07f370f1e1e). The example packs and bundled Pfam 38.2 data are identical to that commit.
+
 Clarified the worked examples against the submitted manuscript and current notebook results. WorkedExample1 now describes the Domain 3/4 and CUPIN association, domain co-occurrence, structurally anchored motif search, and candidate metal-binding sites with appropriate limits; unfinished prose and unsupported functional claims were removed. WorkedExample2 wording now follows the analyses actually shown. Plot labels identify the compared RMSD or community-score distributions more clearly.
 
 The author-supplied HTML exports are labelled as historical snapshots and link to the current notebooks. Their saved scientific content remains unchanged; the output manifest records the updated header bytes and checksums. Notebook setup, Colab links, package version, and GOLD download instructions select v0.1.9.
