@@ -259,7 +259,7 @@ def launch_interactive_selectable_scatter(
         layout=widgets.Layout(width="110px"),
     )
 
-    output_box = widgets.Output(
+    status = widgets.Label(
         layout=widgets.Layout(
             width="800px",
             border="1px solid #ddd",
@@ -267,7 +267,7 @@ def launch_interactive_selectable_scatter(
         )
     )
 
-    plot_container = widgets.Output(
+    plot_container = widgets.Box(
         layout=widgets.Layout(
             width="820px",
         )
@@ -356,24 +356,14 @@ def launch_interactive_selectable_scatter(
         all_selected_ids = list(dict.fromkeys(all_selected_ids))
         count = len(all_selected_ids)
 
-        if count > 0:
-            save_button.disabled = False
-            if not subset_name_input.value.strip():
-                subset_name_input.value = (
-                    f"BOX_{view_dropdown.value}_{count}_HITS"
-                )
-
-            with output_box:
-                output_box.clear_output()
-                print(
-                    f"Selected {count:,} targets across categories. "
-                    f"Click 'Save Subset' to commit."
-                )
-        else:
-            save_button.disabled = True
-            with output_box:
-                output_box.clear_output()
-                print("Selection cleared.")
+        save_button.disabled = count == 0
+        subset_name_input.placeholder = (
+            f"BOX_{view_dropdown.value}_{count}_HITS" if count else "Optional subset name"
+        )
+        status.value = (
+            f"Selected {count:,} targets across categories. Click 'Save Subset' to commit."
+            if count else "Selection cleared."
+        )
 
     def create_styled_figure():
         df = prepare_dataframe()
@@ -476,15 +466,12 @@ def launch_interactive_selectable_scatter(
         save_button.disabled = True
         subset_name_input.value = ""
 
-        with plot_container:
-            plot_container.clear_output(wait=True)
-            new_fig = create_styled_figure()
-            display(new_fig)
-
-        with output_box:
-            output_box.clear_output()
-            if message is not None:
-                print(message)
+        subset_name_input.placeholder = "Optional subset name"
+        old_figures = plot_container.children
+        plot_container.children = (create_styled_figure(),)
+        for figure in old_figures:
+            figure.close()
+        status.value = message or ""
 
     def on_reset_click(button):
         redraw_plot("Plot reset. Ready for a new selection.")
@@ -498,9 +485,7 @@ def launch_interactive_selectable_scatter(
         all_selected_ids = list(dict.fromkeys(all_selected_ids))
 
         if not all_selected_ids:
-            with output_box:
-                output_box.clear_output()
-                print("No points are selected.")
+            status.value = "No points are selected."
             save_button.disabled = True
             return
 
@@ -512,6 +497,10 @@ def launch_interactive_selectable_scatter(
             subset_name = (
                 f"BOX_{parent_view_name}_{len(all_selected_ids)}_HITS"
             )
+
+        if subset_name in views:
+            status.value = f"A view named '{subset_name}' already exists. Choose another name."
+            return
 
         # Generate boolean mask against parent view
         if "target_id" in parent_df.columns:
@@ -539,9 +528,7 @@ def launch_interactive_selectable_scatter(
                 f"{len(all_selected_ids):,} targets using parent '{parent_view_name}'."
             )
         except Exception as exc:
-            with output_box:
-                output_box.clear_output()
-                print(f"Could not save subset '{subset_name}':\n{exc}")
+            status.value = f"Could not save subset '{subset_name}': {exc}"
 
     save_button.on_click(on_save_click)
 
@@ -550,11 +537,7 @@ def launch_interactive_selectable_scatter(
         numeric_cols = get_reordered_numeric_cols(df)
 
         if len(numeric_cols) < 2:
-            with output_box:
-                output_box.clear_output()
-                print(
-                    f"View '{view_dropdown.value}' has fewer than two numeric columns."
-                )
+            status.value = f"View '{view_dropdown.value}' has fewer than two numeric columns."
             x_dropdown.options = numeric_cols
             y_dropdown.options = numeric_cols
             return
@@ -616,7 +599,7 @@ def launch_interactive_selectable_scatter(
             controls_row2,
             controls_row3,
             plot_container,
-            output_box,
+            status,
         ]
     )
 
