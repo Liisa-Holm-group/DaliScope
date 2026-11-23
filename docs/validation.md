@@ -1,5 +1,9 @@
 # Validation record
 
+## Local packing from standalone search results
+
+On 23 November 2026, the installed command-line tools rebuilt the four-target structure store from the [1ajaA example inputs](../examples/local-pack/README.md) on Windows with Python 3.12. The packer was run separately with the example Pfam subset and with each full [38.2 and 39.0 snapshot](https://doi.org/10.5281/zenodo.24465684). Each archive loaded with a query length of 435, 1,965 target residues and 63 alignment segments. All four structures were superimposed, and all four targets received annotations from seven Pfam hits. A separate test packed the custom IDs `001` and `NA` without Pfam data and verified both IDs and their unassigned status in the loaded view.
+
 ## 0.1.9 worked-example text and plot labels
 
 On 1 October 2026, the Windows Python 3.12.14 reference environment passed the pip dependency check and the full unit suite (**73 passed**, 15 existing upstream warnings). All four source notebooks passed nbformat validation and retained output-free source cells.
@@ -114,7 +118,7 @@ Backend refresh uses Matplotlib's private `backend_registry._validate_and_store_
 
 Direct mouse rotation/zoom in py3Dmol remains unverified because browser automation refused fractional input coordinates inside the viewer iframe. That tool limitation is separate from DaliScope computation and widget emission. Hosted SignatureTest and the full GOLD analysis, Plotly mouse controls and direct Matplotlib canvas dragging, and browser file downloads have not yet been recorded as completed. See the [Colab guide](colab.md) for the manual checks.
 
-The local reference environment uses Python 3.12; [Windows reference requirements](requirements-windows-py312.txt) remain available. Cloud runtime libraries can change, so setup preserves the runtime's installed numerical dependencies. Production protein/Pfam/ligand databases are not included; pack generation is exercised with a synthetic fixture. Record version, pack checksum, domains, filters, and clustering/motif parameters with scientific outputs.
+The local reference environment uses Python 3.12; [Windows reference requirements](requirements-windows-py312.txt) remain available. Cloud runtime libraries can change, so setup preserves the runtime's installed numerical dependencies. At the time of the 0.1.3 checks, pack generation was exercised with a synthetic fixture. Record version, pack checksum, domains, filters, and clustering/motif parameters with scientific outputs.
 
 ## Release verification
 

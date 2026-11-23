@@ -2,7 +2,13 @@
 
 DaliScope is a notebook-based toolkit for exploring DALI structural search results. It combines domain-level filtering, Pfam annotation, sequence and secondary-structure profiles, interactive 3D views, motif analysis, and structural community detection.
 
-DaliScope analyzes an existing [DALI data pack](http://ekhidna2.biocenter.helsinki.fi/dali/colab.html), which is self-contained and includes Pfam data.
+## Start with your search results
+
+| What do you have? | Next step |
+| --- | --- |
+| A JOBID from a completed Dali or ISS web search | Enter it in the [data-pack service](http://ekhidna2.biocenter.helsinki.fi/dali/colab.html), download the archive, and open it in Colab. |
+| A DaliScope `.tar.gz` pack | Open [RunDaliScope in Colab](https://colab.research.google.com/github/Liisa-Holm-group/DaliScope/blob/latest/notebooks/RunDaliScope.ipynb) and set `pack_source` to the archive URL or an uploaded file. The pack contains its structures and annotations. |
+| Local DALI or standalone ISS-ProtSci results with alignment segments | Follow [Preparing your own data](docs/prepare-data.md). The [four-hit example](examples/local-pack/README.md) includes all inputs. For your own search, build a small structure store for the hits and add reference annotations from the matching [Pfam snapshot](https://doi.org/10.5281/zenodo.24465684). Custom targets can also be analyzed without annotations. |
 
 ![Example DALI hit landscape](docs/images/overview.png)
 

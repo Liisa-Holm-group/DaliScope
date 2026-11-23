@@ -10,7 +10,7 @@ from io import StringIO
 # --- Configuration & Aliases ---
 
 NAMESPACE_MAP = {
-    "PDB": 1,
+    "LOCAL": 5, "PDB": 1,
     "AFDB2": 2, "AFDB": 2, "ALPHA_FOLD": 2,
     "BFVD": 3,
     "VIRO3D": 4, "VIRO": 4, "VAD": 4, "TOXO": 4
@@ -82,13 +82,16 @@ def parse_modern_tsv(file_path):
             if not line.lstrip().startswith("#")
         )
 
-    df = pd.read_csv(StringIO(cleaned_text), sep="\t")
+    df = pd.read_csv(StringIO(cleaned_text), sep="\t", dtype=str, keep_default_na=False)
 
     # --- normalize columns ---
     df.columns = [normalize(c) for c in df.columns]
 
     # --- resolve columns ---
     c_t = resolve_col(df, "target_id")
+    c_z = resolve_col(df, "z_score")
+    if c_t is None or c_z is None:
+        raise ValueError("alignment TSV requires a target ID and z_score column")
     c_n = resolve_col(df, "namespace")
     c_qs = resolve_col(df, "qstarts")
     c_ss = resolve_col(df, "sstarts")
@@ -106,7 +109,7 @@ def parse_modern_tsv(file_path):
     summary = pd.DataFrame({
         "alignment_id": df["alignment_id"],
         "target_id": target[mask].values,
-        "z_score": pd.to_numeric(df["z_score"], errors="coerce"),
+        "z_score": pd.to_numeric(df[c_z], errors="coerce"),
         "namespace_raw": df[c_n].astype(str) if c_n else None,
     })
 
@@ -224,17 +227,20 @@ def get_namespace_id(name):
     val = str(name).strip().upper()
 
     # 1. Check if it's already a valid numeric string ("1", "2", etc.)
-    if val in ["1", "2", "3", "4"]:
+    if val in ["1", "2", "3", "4", "5"]:
         return int(val)
 
     # 2. Check the map for strings ("PDB", "AFDB2", etc.)
     return NAMESPACE_MAP.get(val, 0)
 
-def process_dali(input_file, namespace_override=None):
-    ext = os.path.splitext(input_file)[1].lower()
+def read_alignments(input_file):
+    if os.path.splitext(input_file)[1].lower() == ".tsv":
+        return parse_modern_tsv(input_file)
+    return parse_legacy_txt(input_file)
 
-    # Parse the raw data
-    df_sum_raw, df_seg = parse_modern_tsv(input_file) if ext == '.tsv' else parse_legacy_txt(input_file)
+
+def process_dali(input_file, namespace_override=None):
+    df_sum_raw, df_seg = read_alignments(input_file)
 
     if df_sum_raw.empty:
         return print(f"No valid data found in {input_file}")
@@ -252,7 +258,7 @@ def process_dali(input_file, namespace_override=None):
     df_mapping = unique_targets.copy()
 
     # handle numeric namespaces directly
-    is_numeric = ns_series.isin(["1", "2", "3", "4"])
+    is_numeric = ns_series.isin(["1", "2", "3", "4", "5"])
     df_mapping["namespace_id"] = 0
 
     df_mapping.loc[is_numeric, "namespace_id"] = ns_series[is_numeric].astype(int)
@@ -285,7 +291,7 @@ def process_dali(input_file, namespace_override=None):
     print(f"Summary saved with columns: {summary_cols}")
 
 if __name__ == "__main__":
-    if len(sys.argv) < 2:
-        print(f"USAGE: {sys.argv[0]} <dali_output_txt_or_tsv> <PDB|AFDB2|BFVD|VIRO3D>")
+    if len(sys.argv) < 3:
+        print(f"USAGE: {sys.argv[0]} <dali_output_txt_or_tsv> <PDB|AFDB2|BFVD|VIRO3D|LOCAL>")
         sys.exit(1)
     process_dali(sys.argv[1], namespace_override=sys.argv[2])

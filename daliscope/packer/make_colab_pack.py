@@ -9,16 +9,16 @@ import sys
 import tarfile
 import tempfile
 
-NAMESPACES = {"PDB": 1, "AFDB2": 2, "BFVD": 3, "VIRO3D": 4}
+NAMESPACES = {"PDB": 1, "AFDB2": 2, "BFVD": 3, "VIRO3D": 4, "LOCAL": 5}
 
 
 def parse_namespace(value):
     text = str(value).upper()
     if text in NAMESPACES:
         return NAMESPACES[text]
-    if text in {"1", "2", "3", "4"}:
+    if text in {"1", "2", "3", "4", "5"}:
         return int(text)
-    raise argparse.ArgumentTypeError("namespace must be PDB, AFDB2, BFVD, VIRO3D, or 1-4")
+    raise argparse.ArgumentTypeError("namespace must be PDB, AFDB2, BFVD, VIRO3D, LOCAL, or 1-5")
 
 
 def build_parser():
@@ -31,7 +31,7 @@ def build_parser():
     parser.add_argument("datfile", type=Path, help="Query DALI .dat metadata")
     parser.add_argument("--ledger-db", type=Path, required=True, help="Protein SQLite ledger")
     parser.add_argument("--shard-dir", type=Path, required=True, help="Directory of protein NPZ shards")
-    parser.add_argument("--pfam-db", type=Path, required=True, help="Pfam annotation SQLite database")
+    parser.add_argument("--pfam-db", type=Path, help="Pfam annotation SQLite database (optional for LOCAL targets)")
     parser.add_argument(
         "--pfam-names", type=Path,
         default=Path(__file__).resolve().parent / "data" / "pfam_names.tsv",
@@ -49,6 +49,8 @@ def main(argv=None):
     args = parser.parse_args(argv)
     if Path(args.testpack_name).name != args.testpack_name or args.testpack_name in {"", ".", ".."}:
         parser.error("testpack_name must be a filename basename")
+    if args.pfam_db is None and args.ns_id != NAMESPACES["LOCAL"]:
+        parser.error("--pfam-db is required for reference database targets")
     for field in ("tsvfile", "pdbfile", "datfile", "ledger_db", "pfam_db", "pfam_names", "ligand_db"):
         value = getattr(args, field)
         if value is not None:
@@ -75,7 +77,13 @@ def main(argv=None):
 
         run("minimal_parser.py", args.tsvfile, args.ns_id)
         run("colab_package.py", args.ns_id, "--database", args.ledger_db, "--shards", args.shard_dir)
-        run("pfam_query.py", args.ns_id, "--database", args.pfam_db)
+        if args.pfam_db is not None:
+            run("pfam_query.py", args.ns_id, "--database", args.pfam_db)
+        else:
+            (work / "pfam.tsv").write_text(
+                "target_name\tquery_accession\te_value\tenv_from\tenv_to\tdatabase\tclan\n",
+                encoding="utf-8",
+            )
         run("renumber_pdb.py", args.pdbfile, args.chainid, "Query.pdb")
         run("query_meta.py", args.datfile, "query_meta.tsv")
         run("mini_pfam_names.py", args.pfam_names, "mini_pfam_names.tsv")

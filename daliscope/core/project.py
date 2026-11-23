@@ -387,7 +387,10 @@ PUU domains: {self.puu_domains}
 
                 elif filename.endswith(".tsv"):
                     key = filename.replace(".tsv", "")
-                    raw_tsvs[key] = pd.read_csv(fobj, sep="\t")
+                    # Target IDs may be numeric strings or resemble a missing-value token.
+                    raw_tsvs[key] = pd.read_csv(
+                        fobj, sep="\t", converters=dict.fromkeys(("target_id", "dali_id", "target_name"), str)
+                    )
 
         if not found_npz:
             raise FileNotFoundError("colab_pack.npz not found in archive")

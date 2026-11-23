@@ -6,7 +6,7 @@ import sqlite3
 
 import pandas as pd
 
-NAMESPACE = {1: "PDB", 2: "AFDB2", 3: "BFVD", 4: "VIRO3D"}
+NAMESPACE = {1: "PDB", 2: "AFDB2", 3: "BFVD", 4: "VIRO3D", 5: "LOCAL"}
 
 # Pfam 39.0 databases keep each hit together with its clan in hmmer_hits_with_CL.
 # Older databases (Pfam 38.2) have hmmer_hits and take the clan from pfam_entries.
@@ -59,7 +59,7 @@ def main(argv=None):
     parser.add_argument("--index", type=Path, default=Path("colab_pack_index.tsv"))
     parser.add_argument("--output", type=Path, default=Path("pfam.tsv"))
     args = parser.parse_args(argv)
-    df = pd.read_csv(args.index, sep="\t")
+    df = pd.read_csv(args.index, sep="\t", dtype={"dali_id": str}, keep_default_na=False)
     extract_hits(args.database, df["dali_id"].tolist(), args.namespace, args.output)
 
 

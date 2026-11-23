@@ -33,6 +33,7 @@ Issues = "https://github.com/Liisa-Holm-group/DaliScope/issues"
 
 [project.scripts]
 daliscope-pack = "daliscope.packer.make_colab_pack:main"
+daliscope-build-store = "daliscope.packer.build_store:main"
 
 [tool.setuptools.packages.find]
 include = ["daliscope", "daliscope.*"]
