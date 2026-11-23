@@ -523,6 +523,16 @@ def launch_interactive_selectable_scatter(
                 },
             )
 
+            # Updating Dropdown.options selects its first item. Keep the
+            # current parent and redraw only once, after the menu is synced.
+            view_dropdown.unobserve(update_plot, names="value")
+            try:
+                with view_dropdown.hold_sync():
+                    view_dropdown.options = tuple(views)
+                    view_dropdown.value = parent_view_name
+            finally:
+                view_dropdown.observe(update_plot, names="value")
+
             redraw_plot(
                 f"Successfully registered subset '{subset_name}' with "
                 f"{len(all_selected_ids):,} targets using parent '{parent_view_name}'."
