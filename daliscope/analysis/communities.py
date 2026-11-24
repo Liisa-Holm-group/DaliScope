@@ -161,10 +161,10 @@ def run_community_detection(
         )
     )
 
-    # 5. Top-K Alignment & Graph Construction
+    # 5. Fingerprint neighbour retrieval and graph construction
     t1 = time.time()
     if verbose:
-        print(f"Running {len(target_labels) * k_neighbors} pairwise STRUCTAL alignments ...")
+        print(f"Retrieving voxel-fingerprint neighbours for {len(target_labels):,} targets (k={k_neighbors}) ...")
         print("Runtime depends on the selected population, structure sizes, and hardware.")
 
     neighbors, scores = (
@@ -187,8 +187,8 @@ def run_community_detection(
 
     if verbose:
         print(
-            f"Timings (sec): Index={t1-t0:.2f}s, Alignment={t2-t1:.2f}s, "
-            f"Graph={t3-t2:.2f}s | Total={t3-t0:.2f}s"
+            f"Timings (sec): Index={t1-t0:.2f}s, Fingerprint search={t2-t1:.2f}s, "
+            f"Graph={t3-t2:.2f}s | Subtotal={t3-t0:.2f}s"
         )
 
     # 6. Infomap Partitioning
