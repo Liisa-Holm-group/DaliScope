@@ -8,7 +8,7 @@ DaliScope is a notebook-based toolkit for exploring DALI structural search resul
 | --- | --- |
 | A JOBID from a completed Dali or ISS web search | Enter it in the [data-pack service](http://ekhidna2.biocenter.helsinki.fi/dali/colab.html), download the archive, and open it in Colab. |
 | A DaliScope `.tar.gz` pack | Open [RunDaliScope in Colab](https://colab.research.google.com/github/Liisa-Holm-group/DaliScope/blob/latest/notebooks/RunDaliScope.ipynb) and set `pack_source` to the archive URL or an uploaded file. The pack contains its structures and annotations. |
-| Local DALI or standalone ISS-ProtSci results with alignment segments | Follow [Preparing your own data](docs/prepare-data.md). The [four-hit example](examples/local-pack/README.md) includes all inputs. For your own search, build a small structure store for the hits and add reference annotations from the matching [Pfam snapshot](https://doi.org/10.5281/zenodo.24465684). Custom targets can also be analyzed without annotations. |
+| Local DALI or standalone ISS-ProtSci results with alignment segments | Use the `main` branch and follow [Preparing your own data](docs/prepare-data.md). The [four-hit example](examples/local-pack/README.md) shows how to build a structure store for your hits. Pfam annotations are optional for custom (`LOCAL`) targets. |
 
 ![Example DALI hit landscape](docs/images/overview.png)
 
@@ -39,6 +39,8 @@ To analyze your own DALI data pack, open **[RunDaliScope in Colab](https://colab
 These links use **v0.1.9** so notebook code and installed source match. When moving from an earlier release, start a fresh Colab runtime before running the new notebook. To change data, domains, filters, or motifs, reload a fresh project and execute subsequent sections in order. See the [Colab guide](docs/colab.md) for setup, interactive controls, and downloading results.
 
 ## Run locally with Python 3.12
+
+The commands below install **v0.1.9** to reproduce the paper’s notebooks. To pack reference hits with this release, supply an existing structure index and the paper’s **Pfam 38.2** database. To build a pack from your own target structures, clone **main** and use its [local packing instructions](docs/prepare-data.md#try-local-packing). The main-branch packer also supports [Pfam 39.0](https://doi.org/10.5281/zenodo.24465684).
 
 Use **Python 3.12** for the reference environment. Check `python --version` before creating the environment; the commands below assume it reports 3.12. If your default Python is 3.13, install/select Python 3.12 and use its executable for the venv command, or use the independent Conda alternative below. The package declares Python 3.10 or newer; tested platform/version coverage is recorded in [validation](docs/validation.md).
 
