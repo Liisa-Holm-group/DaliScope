@@ -1,44 +1,23 @@
 [
   {
     "example": "WorkedExample1",
-    "description": "Multidomain analysis and sequence signatures",
     "file": "WorkedExample1.html",
-    "original_file": "SignatureTest.html",
-    "source_url": "http://ekhidna2.biocenter.helsinki.fi/barcosel/tmp/SignatureTest.html",
-    "resolved_url": "http://ekhidna2.biocenter.helsinki.fi/barcosel/tmp/SignatureTest.html",
-    "status": 200,
-    "content_type": "text/html; charset=UTF-8",
-    "bytes": 3697461,
-    "sha256": "32938ce14f0edc7ff0c306366d13b8b7ef37b9f5bb50d2a037311814cd5dfdd3",
-    "retrieved_utc": "2026-09-28T19:45:38.793786+00:00",
-    "saved_bytes": 3698940,
-    "saved_sha256": "4bc652c1de27fa0434650237264968b48975cb8ab9ba5d311dbba1983db2547e",
-    "execution_version": null,
-    "changes": [
-      "Browser title identifies the current example name and HTML example output.",
-      "Navigation and explanatory header inserted immediately after the opening body tag."
-    ],
-    "scientific_content_preserved": true
+    "execution_version": "v0.1.9",
+    "supplement": "ST1",
+    "data_pack": "ZN_full.tar.gz",
+    "data_pack_sha256": "52d24e8a590c9fe6cdb6ba16514300a06ad5c17b3f18c06102a2d044ea0f08ef",
+    "saved_bytes": 4121433,
+    "saved_sha256": "0ce20837e1f3372001b1e34b6eaa8fce880f8f9c1f3058ef66e53c1d082aebca"
   },
   {
     "example": "WorkedExample2",
-    "description": "GOLD fold communities and structural clustering",
     "file": "WorkedExample2.html",
-    "original_file": "WorkedExample-6.html",
-    "source_url": "http://ekhidna2.biocenter.helsinki.fi/barcosel/tmp/WorkedExample-6.html",
-    "resolved_url": "http://ekhidna2.biocenter.helsinki.fi/barcosel/tmp/WorkedExample-6.html",
-    "status": 200,
-    "content_type": "text/html; charset=UTF-8",
-    "bytes": 3015290,
-    "sha256": "333b222d85c22f4bad6db9f7a21f6911476919674f9cc9bf16f98341ab15ce81",
-    "retrieved_utc": "2026-09-28T19:45:39.547708+00:00",
-    "saved_bytes": 3016767,
-    "saved_sha256": "05b5f576144db213e636387107c17337ef23e7c1ee6694d2124f88764199c792",
-    "execution_version": null,
-    "changes": [
-      "Browser title identifies the current example name and HTML example output.",
-      "Navigation and explanatory header inserted immediately after the opening body tag."
-    ],
-    "scientific_content_preserved": true
+    "execution_version": "v0.1.9",
+    "supplement": "ST2",
+    "data_pack": "GOLD.tar.gz",
+    "data_pack_sha256": "d3fc732890400446bd128fa178e9a3e13c3c28b1dac5c3656c76459185f660ed",
+    "saved_bytes": 5752269,
+    "saved_sha256": "e0a6892869c55609a3527fc086ae443c38297682d52f0dda5159607aea17145b",
+    "presentation": "Pfam heatmaps redrawn from the saved 23-community partition, with rows ordered by peak module and descending peak count."
   }
 ]

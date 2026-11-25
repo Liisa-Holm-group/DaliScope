@@ -19,7 +19,7 @@ Open the saved **HTML example outputs** directly in your browser. No installatio
 - [WorkedExample1 — HTML example output](https://liisa-holm-group.github.io/DaliScope/example-outputs/WorkedExample1.html): multidomain analysis and sequence signatures.
 - [WorkedExample2 — HTML example output](https://liisa-holm-group.github.io/DaliScope/example-outputs/WorkedExample2.html): GOLD fold communities and structural clustering.
 
-These author-supplied pages preserve historical outputs and were not regenerated for v0.1.9. Their saved counts differ from current notebook runs (WorkedExample1: 1,176 vs. 1,173; WorkedExample2: 6,708 vs. 6,465). Run the notebooks for current results and Python-backed interactive controls. See [source and provenance](docs/example-outputs/README.md) for export details.
+These pages show the v0.1.9 results in Supplementary Texts ST1 and ST2. Run the notebooks for interactive controls. See the [output provenance](docs/example-outputs/README.md) for data checksums and the ST2 heatmap ordering.
 
 ## Run in your browser with Colab
 
