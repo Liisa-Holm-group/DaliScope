@@ -333,7 +333,7 @@ def plot_module_score_distributions(
 
     return fig, ax
 
-def module_pfam_table(project, modules_df, row_group='clab', min_count=0):
+def module_pfam_table(project, modules_df, row_group='clan', min_count=0):
     # display colored counts table of pfam category vs. module
     if row_group == "pfam": 
         desc_col = "name"
@@ -362,6 +362,17 @@ def module_pfam_table(project, modules_df, row_group='clab', min_count=0):
         aggfunc="sum",
         fill_value=0,
     )
+    if pivot_counts.empty:
+        print(f"No data available for {row_group} with min_count={min_count}.")
+        return
+
+    # Group rows by their peak module, with the largest peak first in each group.
+    # Ties retain the alphabetical row order from pivot_table.
+    order = pd.DataFrame({
+        "module": pivot_counts.idxmax(axis=1),
+        "count": pivot_counts.max(axis=1),
+    }).sort_values(["module", "count"], ascending=[True, False])
+    pivot_counts = pivot_counts.loc[order.index]
     log_counts = np.log1p(pivot_counts)
 
     # 3. Plot Seaborn Heatmap
